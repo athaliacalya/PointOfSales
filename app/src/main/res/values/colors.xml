@@ -1,0 +1,6 @@
+<resources>
+    <color name="bg_main">#FFF6FA</color>
+    <color name="text_primary">#2E2E2E</color>
+    <color name="text_secondary">#7A7A7A</color>
+    <color name="primary">#4CAF50</color>
+</resources>

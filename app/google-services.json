@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "24613195890",
+    "project_id": "sellio-athalia",
+    "storage_bucket": "sellio-athalia.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24613195890:android:aeece4ca76cf870e79f2eb",
+        "android_client_info": {
+          "package_name": "com.athalia.sellio"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWaaaEWJEC9SUVPUUqRZHGPJgRizkMIsI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

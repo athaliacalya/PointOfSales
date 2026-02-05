@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_main"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <!-- ================= HEADER ================= -->
+
+        <TextView
+            android:id="@+id/tvGreeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:text="Selamat Siang, Athalia"
+            android:textColor="@color/text_primary"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="05 Februari 2026"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/tvGreeting"
+            app:layout_constraintTop_toBottomOf="@id/tvGreeting" />
+
+        <!-- ================= CARD ESTIMASI ================= -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardEstimasi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tvDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Estimasi Hari Ini"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rp 0"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <!-- TRANSAKSI -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_transaction" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Transaksi"
+                            android:textColor="#010101"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <!-- PELANGGAN -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_customer" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Pelanggan"
+                            android:textColor="#010101"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <!-- LAPORAN -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_report" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Laporan"
+                            android:textColor="#010101"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ================= GRID MENU BAWAH ================= -->
+
+        <GridLayout
+            android:id="@+id/gridMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:columnCount="3"
+            app:layout_constraintTop_toBottomOf="@id/cardEstimasi"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- AKUN -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="130dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:id="@+id/imgAkun"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="12dp"
+                        android:src="@drawable/ic_account" />
+
+                    <TextView
+                        android:id="@+id/tvAkun"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Akun"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- LAYANAN -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="130dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:id="@+id/imgKategori"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="12dp"
+                        android:src="@drawable/ic_kategori" />
+
+                    <TextView
+                        android:id="@+id/tvLayanan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Kategori"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- TAMBAHAN -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="130dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:id="@+id/imgProduk"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="12dp"
+                        android:src="@drawable/ic_product" />
+
+                    <TextView
+                        android:id="@+id/tvTambahan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Produk"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- PEGAWAI -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="130dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:id="@+id/imgPegawai"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="12dp"
+                        android:src="@drawable/ic_employee" />
+
+                    <TextView
+                        android:id="@+id/tvPegawai"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Pegawai"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- CABANG -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="130dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:id="@+id/imgCabang"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="12dp"
+                        android:src="@drawable/ic_branch" />
+
+                    <TextView
+                        android:id="@+id/tvCabang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Cabang"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- PRINTER -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="130dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:id="@+id/imgPrinter"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginBottom="12dp"
+                        android:src="@drawable/ic_printer" />
+
+                    <TextView
+                        android:id="@+id/tvPrinter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Printer"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </GridLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
