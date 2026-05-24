@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.athalia.sellio" />
-                  <option name="mobileSdkAppId" value="1:24613195890:android:aeece4ca76cf870e79f2eb" />
-                  <option name="projectId" value="sellio-athalia" />
-                  <option name="projectNumber" value="24613195890" />
+                  <option name="mobileSdkAppId" value="1:750053363415:android:d35a01b1b1b2086d052a92" />
+                  <option name="projectId" value="pose-thali" />
+                  <option name="projectNumber" value="750053363415" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

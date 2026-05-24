@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "24613195890",
-    "project_id": "sellio-athalia",
-    "storage_bucket": "sellio-athalia.firebasestorage.app"
+    "project_number": "750053363415",
+    "firebase_url": "https://pose-thali-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "pose-thali",
+    "storage_bucket": "pose-thali.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:24613195890:android:aeece4ca76cf870e79f2eb",
+        "mobilesdk_app_id": "1:750053363415:android:d35a01b1b1b2086d052a92",
         "android_client_info": {
           "package_name": "com.athalia.sellio"
         }
@@ -15,7 +16,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBWaaaEWJEC9SUVPUUqRZHGPJgRizkMIsI"
+          "current_key": "AIzaSyA6qS4B4hnmqWXmbkjlI8lkh6MoTrzN068"
         }
       ],
       "services": {

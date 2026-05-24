@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_main"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:id="@+id/main">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -199,8 +200,9 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- LAYANAN -->
+            <!-- KATEGORI -->
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardKategori"
                 android:layout_width="0dp"
                 android:layout_height="130dp"
                 android:layout_columnWeight="1"
@@ -224,7 +226,7 @@
                         android:src="@drawable/ic_kategori" />
 
                     <TextView
-                        android:id="@+id/tvLayanan"
+                        android:id="@+id/tvKategori"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -235,7 +237,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- TAMBAHAN -->
+            <!-- PRODUK -->
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="130dp"
@@ -260,7 +262,7 @@
                         android:src="@drawable/ic_product" />
 
                     <TextView
-                        android:id="@+id/tvTambahan"
+                        android:id="@+id/tvProduk"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center"
