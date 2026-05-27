@@ -2,20 +2,20 @@ package com.athalia.sellio.kategori
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.athalia.sellio.R
 import com.athalia.sellio.model.ModelCabang
 import com.athalia.sellio.model.ModelKategori
 import com.athalia.sellio.model.ModelProduk
+import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
+import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.*
 
 class ModProdukActivity : AppCompatActivity() {
@@ -26,6 +26,7 @@ class ModProdukActivity : AppCompatActivity() {
     private lateinit var etNamaProduk: TextInputEditText
     private lateinit var etFotoUrl: TextInputEditText
     private lateinit var imgPreview: ImageView
+    private lateinit var tvFotoEmpty: TextView
     private lateinit var etHargaJual: TextInputEditText
     private lateinit var etHargaModal: TextInputEditText
     private lateinit var etStok: TextInputEditText
@@ -35,10 +36,7 @@ class ModProdukActivity : AppCompatActivity() {
     private lateinit var rbTersedia: RadioButton
     private lateinit var rbHabis: RadioButton
     private lateinit var btnUpdateMenu: MaterialButton
-
-    // Card untuk status
-    private lateinit var cardTersedia: MaterialCardView
-    private lateinit var cardHabis: MaterialCardView
+    private lateinit var llSelectedCabang: LinearLayout
 
     // Firebase
     private lateinit var database: DatabaseReference
@@ -52,6 +50,10 @@ class ModProdukActivity : AppCompatActivity() {
     private lateinit var listKategori: ArrayList<ModelKategori>
     private lateinit var cabangNames: ArrayList<String>
     private lateinit var kategoriNames: ArrayList<String>
+
+    // Menyimpan cabang yang dipilih (multi-select)
+    private val selectedCabangIds = ArrayList<String>()
+    private val selectedCabangNames = ArrayList<String>()
 
     companion object {
         const val EXTRA_PRODUK_ID = "extra_produk_id"
@@ -84,11 +86,13 @@ class ModProdukActivity : AppCompatActivity() {
     }
 
     private fun init() {
+        // Inisialisasi view
         btnBack = findViewById(R.id.btnBack)
         tvTitle = findViewById(R.id.tvTitle)
         etNamaProduk = findViewById(R.id.etNamaProduk)
         etFotoUrl = findViewById(R.id.etFotoUrl)
         imgPreview = findViewById(R.id.imgPreview)
+        tvFotoEmpty = findViewById(R.id.tvFotoEmpty)
         etHargaJual = findViewById(R.id.etHargaJual)
         etHargaModal = findViewById(R.id.etHargaModal)
         etStok = findViewById(R.id.etStok)
@@ -98,12 +102,12 @@ class ModProdukActivity : AppCompatActivity() {
         rbTersedia = findViewById(R.id.rbTersedia)
         rbHabis = findViewById(R.id.rbHabis)
         btnUpdateMenu = findViewById(R.id.btnUpdateMenu)
+        llSelectedCabang = findViewById(R.id.llSelectedCabang)
 
-        cardTersedia = rbTersedia.parent.parent as MaterialCardView
-        cardHabis = rbHabis.parent.parent as MaterialCardView
-
+        // Inisialisasi Firebase
         database = FirebaseDatabase.getInstance().reference
 
+        // Inisialisasi list
         listCabang = ArrayList()
         listKategori = ArrayList()
         cabangNames = ArrayList()
@@ -117,47 +121,81 @@ class ModProdukActivity : AppCompatActivity() {
             isEditMode = true
             tvTitle.text = "Edit Menu"
 
+            // Isi data dari intent
             etNamaProduk.setText(intent.getStringExtra(EXTRA_PRODUK_NAMA) ?: "")
             etHargaJual.setText(intent.getIntExtra(EXTRA_PRODUK_HARGA, 0).toString())
             etStok.setText(intent.getIntExtra(EXTRA_PRODUK_STOK, 0).toString())
             etFotoUrl.setText(intent.getStringExtra(EXTRA_PRODUK_FOTO) ?: "")
 
+            // Preview foto
             val fotoUrl = intent.getStringExtra(EXTRA_PRODUK_FOTO)
             if (!fotoUrl.isNullOrEmpty()) {
                 loadImagePreview(fotoUrl)
             }
 
+            // Set status
             val status = intent.getStringExtra(EXTRA_PRODUK_STATUS) ?: "1"
             if (status == "1") {
                 rbTersedia.isChecked = true
-                updateStatusColor(true)
             } else {
                 rbHabis.isChecked = true
-                updateStatusColor(false)
+            }
+
+            // Load cabang yang sudah dipilih (jika ada)
+            val cabangIds = intent.getStringExtra(EXTRA_PRODUK_CABANG_ID) ?: ""
+            if (cabangIds.isNotEmpty()) {
+                // Akan diisi setelah data cabang dimuat
             }
         } else {
             isEditMode = false
             tvTitle.text = "Tambah Menu"
             rbTersedia.isChecked = true
-            updateStatusColor(true)
         }
     }
 
     private fun setupDropdowns() {
-        val cabangAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, cabangNames)
-        actCabang.setAdapter(cabangAdapter)
-        actCabang.threshold = 1
+        // Setup untuk multi-select cabang
+        actCabang.setOnItemClickListener { _, _, position, _ ->
+            val selected = cabangNames[position]
+            if (!selectedCabangNames.contains(selected)) {
+                val cabang = listCabang.find { it.namaCabang == selected }
+                cabang?.let {
+                    selectedCabangIds.add(it.idCabang)
+                    selectedCabangNames.add(it.namaCabang ?: "")
+                    addChipForCabang(it.namaCabang ?: "")
+                }
+            }
+            actCabang.setText("")
+        }
+    }
 
-        val kategoriAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, kategoriNames)
-        actKategori.setAdapter(kategoriAdapter)
-        actKategori.threshold = 1
+    private fun addChipForCabang(cabangName: String) {
+        val chip = Chip(this).apply {
+            text = cabangName
+            isCloseIconVisible = true
+            setOnCloseIconClickListener {
+                val index = selectedCabangNames.indexOf(cabangName)
+                if (index >= 0) {
+                    selectedCabangNames.removeAt(index)
+                    selectedCabangIds.removeAt(index)
+                    llSelectedCabang.removeView(this)
+                }
+                if (selectedCabangNames.isEmpty()) {
+                    llSelectedCabang.visibility = View.GONE
+                }
+            }
+        }
+        llSelectedCabang.addView(chip)
+        llSelectedCabang.visibility = View.VISIBLE
     }
 
     private fun setupListeners() {
+        // Tombol back
         btnBack.setOnClickListener {
             finish()
         }
 
+        // Preview foto saat URL berubah
         etFotoUrl.addTextChangedListener(object : android.text.TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
@@ -166,53 +204,33 @@ class ModProdukActivity : AppCompatActivity() {
                     if (url.isNotEmpty()) {
                         loadImagePreview(url)
                     } else {
-                        imgPreview.visibility = android.view.View.GONE
+                        imgPreview.setImageResource(R.drawable.ic_image_placeholder)
+                        tvFotoEmpty.visibility = View.VISIBLE
                     }
                 }
             }
         })
 
-        rgStatus.setOnCheckedChangeListener { _, checkedId ->
-            when (checkedId) {
-                R.id.rbTersedia -> updateStatusColor(true)
-                R.id.rbHabis -> updateStatusColor(false)
-            }
-        }
-
+        // Tombol update
         btnUpdateMenu.setOnClickListener {
             saveProduk()
         }
     }
 
-    private fun updateStatusColor(isTersedia: Boolean) {
-        if (isTersedia) {
-            cardTersedia.strokeColor = ContextCompat.getColor(this, R.color.green_500)
-            cardTersedia.strokeWidth = 2
-            cardHabis.strokeColor = ContextCompat.getColor(this, R.color.gray_300)
-            cardHabis.strokeWidth = 1
+    private fun loadImagePreview(url: String) {
+        try {
+            Glide.with(this)
+                .load(url)
+                .placeholder(R.drawable.ic_image_placeholder)
+                .error(R.drawable.ic_image_error)
+                .into(imgPreview)
 
-            rbTersedia.setCompoundDrawablesWithIntrinsicBounds(
-                ContextCompat.getDrawable(this, R.drawable.ic_check_circle_green),
-                null, null, null
-            )
-            rbHabis.setCompoundDrawablesWithIntrinsicBounds(
-                ContextCompat.getDrawable(this, R.drawable.ic_check_circle_gray),
-                null, null, null
-            )
-        } else {
-            cardHabis.strokeColor = ContextCompat.getColor(this, R.color.red_500)
-            cardHabis.strokeWidth = 2
-            cardTersedia.strokeColor = ContextCompat.getColor(this, R.color.gray_300)
-            cardTersedia.strokeWidth = 1
-
-            rbHabis.setCompoundDrawablesWithIntrinsicBounds(
-                ContextCompat.getDrawable(this, R.drawable.ic_cancel_red),
-                null, null, null
-            )
-            rbTersedia.setCompoundDrawablesWithIntrinsicBounds(
-                ContextCompat.getDrawable(this, R.drawable.ic_check_circle_gray),
-                null, null, null
-            )
+            imgPreview.visibility = View.VISIBLE
+            tvFotoEmpty.visibility = View.GONE
+        } catch (e: Exception) {
+            e.printStackTrace()
+            imgPreview.setImageResource(R.drawable.ic_image_error)
+            tvFotoEmpty.visibility = View.GONE
         }
     }
 
@@ -220,12 +238,8 @@ class ModProdukActivity : AppCompatActivity() {
         btnUpdateMenu.text = if (isEditMode) "Update Menu" else "Simpan Menu"
     }
 
-    private fun loadImagePreview(url: String) {
-        imgPreview.setImageResource(R.drawable.ic_image_placeholder)
-        imgPreview.visibility = android.view.View.VISIBLE
-    }
-
     private fun loadDropdownData() {
+        // Load cabang dari Firebase
         database.child("cabang").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 listCabang.clear()
@@ -240,15 +254,24 @@ class ModProdukActivity : AppCompatActivity() {
                     }
                 }
 
-                val cabangAdapter = ArrayAdapter(this@ModProdukActivity, android.R.layout.simple_dropdown_item_1line, cabangNames)
+                val cabangAdapter = ArrayAdapter(
+                    this@ModProdukActivity,
+                    android.R.layout.simple_dropdown_item_1line,
+                    cabangNames
+                )
                 actCabang.setAdapter(cabangAdapter)
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@ModProdukActivity, "Gagal load cabang: ${error.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@ModProdukActivity,
+                    "Gagal load cabang: ${error.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
 
+        // Load kategori dari Firebase
         database.child("kategori").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 listKategori.clear()
@@ -263,50 +286,65 @@ class ModProdukActivity : AppCompatActivity() {
                     }
                 }
 
-                val kategoriAdapter = ArrayAdapter(this@ModProdukActivity, android.R.layout.simple_dropdown_item_1line, kategoriNames)
+                val kategoriAdapter = ArrayAdapter(
+                    this@ModProdukActivity,
+                    android.R.layout.simple_dropdown_item_1line,
+                    kategoriNames
+                )
                 actKategori.setAdapter(kategoriAdapter)
+
+                // Jika mode edit, set kategori yang dipilih
+                if (isEditMode) {
+                    val kategoriId = intent.getStringExtra(EXTRA_PRODUK_KATEGORI_ID) ?: ""
+                    if (kategoriId.isNotEmpty()) {
+                        val selectedKategori = listKategori.find { it.idKategori == kategoriId }
+                        selectedKategori?.let {
+                            actKategori.setText(it.namaKategori, false)
+                        }
+                    }
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@ModProdukActivity, "Gagal load kategori: ${error.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@ModProdukActivity,
+                    "Gagal load kategori: ${error.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }
 
     private fun saveProduk() {
+        // Validasi input
         val namaProduk = etNamaProduk.text.toString().trim()
         val fotoUrl = etFotoUrl.text.toString().trim()
         val hargaJual = etHargaJual.text.toString().trim()
         val stok = etStok.text.toString().trim()
-        val cabangTerpilih = actCabang.text.toString().trim()
         val kategoriTerpilih = actKategori.text.toString().trim()
 
+        // Validasi nama produk
         if (namaProduk.isEmpty()) {
             etNamaProduk.error = "Nama produk tidak boleh kosong"
             etNamaProduk.requestFocus()
             return
         }
 
+        // Validasi harga jual
         if (hargaJual.isEmpty()) {
             etHargaJual.error = "Harga jual tidak boleh kosong"
             etHargaJual.requestFocus()
             return
         }
 
+        // Validasi stok
         if (stok.isEmpty()) {
             etStok.error = "Stok tidak boleh kosong"
             etStok.requestFocus()
             return
         }
 
-        var idCabang = ""
-        for (cabang in listCabang) {
-            if (cabang.namaCabang == cabangTerpilih) {
-                idCabang = cabang.idCabang
-                break
-            }
-        }
-
+        // Cari ID kategori dari nama yang dipilih
         var idKategori = ""
         for (kategori in listKategori) {
             if (kategori.namaKategori == kategoriTerpilih) {
@@ -315,8 +353,13 @@ class ModProdukActivity : AppCompatActivity() {
             }
         }
 
+        // Get status
         val status = if (rbTersedia.isChecked) "1" else "0"
 
+        // Gabungkan ID cabang yang dipilih
+        val cabangIds = selectedCabangIds.joinToString(",")
+
+        // Buat ID produk (jika tambah baru)
         val produkRef = if (isEditMode && produkId != null) {
             database.child("produk").child(produkId!!)
         } else {
@@ -325,12 +368,13 @@ class ModProdukActivity : AppCompatActivity() {
 
         val newProdukId = if (isEditMode) produkId else produkRef.key
 
+        // Buat object produk
         val produk = ModelProduk(
             idProduk = newProdukId ?: "",
             namaProduk = namaProduk,
             hargaProduk = hargaJual.toIntOrNull() ?: 0,
             idKategori = idKategori,
-            idCabang = idCabang,
+            idCabang = cabangIds,
             fotoProduk = fotoUrl,
             stokProduk = stok.toIntOrNull() ?: 0,
             statusProduk = status,
@@ -341,11 +385,17 @@ class ModProdukActivity : AppCompatActivity() {
             produk.createdAt = System.currentTimeMillis().toString()
         }
 
+        // Simpan ke Firebase
         produkRef.setValue(produk)
             .addOnSuccessListener {
-                val message = if (isEditMode) "Menu berhasil diupdate" else "Menu berhasil ditambahkan"
+                val message = if (isEditMode) {
+                    "Menu berhasil diupdate"
+                } else {
+                    "Menu berhasil ditambahkan"
+                }
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
+                // Kembali ke halaman sebelumnya dengan result
                 val resultIntent = Intent()
                 setResult(RESULT_OK, resultIntent)
                 finish()

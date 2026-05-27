@@ -8,12 +8,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.athalia.sellio.R
+import com.athalia.sellio.model.ModelCabang
+import com.athalia.sellio.model.ModelKategori
 import com.athalia.sellio.model.ModelProduk
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
@@ -28,6 +31,7 @@ class DataProdukActivity : AppCompatActivity() {
     private lateinit var etSearch: TextInputEditText
     private lateinit var rvDataProduk: RecyclerView
     private lateinit var fabAdd: FloatingActionButton
+
     private lateinit var listProduk: ArrayList<ModelProduk>
     private lateinit var listProdukOriginal: ArrayList<ModelProduk>
     private lateinit var adapter: ProdukAdapter
@@ -84,10 +88,11 @@ class DataProdukActivity : AppCompatActivity() {
 
         adapter.setOnItemClickListener(object : ProdukAdapter.OnItemClickListener {
             override fun onItemClick(produk: ModelProduk) {
-                Toast.makeText(this@DataProdukActivity, "Klik: ${produk.namaProduk}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DataProdukActivity, "${produk.namaProduk}", Toast.LENGTH_SHORT).show()
             }
 
             override fun onEditClick(produk: ModelProduk) {
+                // Pindah ke ModProdukActivity untuk edit
                 val intent = Intent(this@DataProdukActivity, ModProdukActivity::class.java)
                 intent.putExtra(EXTRA_PRODUK_ID, produk.idProduk)
                 intent.putExtra(EXTRA_PRODUK_NAMA, produk.namaProduk)
@@ -101,16 +106,24 @@ class DataProdukActivity : AppCompatActivity() {
             }
 
             override fun onDeleteClick(produk: ModelProduk) {
-                if (produk.idProduk.isNotEmpty()) {
-                    database.child(produk.idProduk).removeValue()
-                        .addOnSuccessListener {
-                            Toast.makeText(this@DataProdukActivity, "Produk ${produk.namaProduk} berhasil dihapus", Toast.LENGTH_SHORT).show()
-                            loadDataFromFirebase()
+                // Tampilkan dialog konfirmasi sebelum delete
+                AlertDialog.Builder(this@DataProdukActivity)
+                    .setTitle("Hapus Menu")
+                    .setMessage("Apakah Anda yakin ingin menghapus menu ${produk.namaProduk}?")
+                    .setPositiveButton("Hapus") { _, _ ->
+                        if (produk.idProduk.isNotEmpty()) {
+                            database.child(produk.idProduk).removeValue()
+                                .addOnSuccessListener {
+                                    Toast.makeText(this@DataProdukActivity, "Menu ${produk.namaProduk} berhasil dihapus", Toast.LENGTH_SHORT).show()
+                                    loadDataFromFirebase()
+                                }
+                                .addOnFailureListener { error ->
+                                    Toast.makeText(this@DataProdukActivity, "Gagal menghapus: ${error.message}", Toast.LENGTH_SHORT).show()
+                                }
                         }
-                        .addOnFailureListener { error ->
-                            Toast.makeText(this@DataProdukActivity, "Gagal menghapus produk: ${error.message}", Toast.LENGTH_SHORT).show()
-                        }
-                }
+                    }
+                    .setNegativeButton("Batal", null)
+                    .show()
             }
         })
 
@@ -151,19 +164,8 @@ class DataProdukActivity : AppCompatActivity() {
         }
 
         fabAdd.setOnClickListener {
-            try {
-                // Cara 1: Intent biasa
-                val intent = Intent(this, ModProdukActivity::class.java)
-                startActivity(intent)
-
-                // Cara 2: Intent dengan package lengkap (alternatif jika cara 1 tidak berhasil)
-                // val intent = Intent(this, Class.forName("com.athalia.sellio.kategori.ModProdukActivity"))
-                // startActivity(intent)
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
-            }
+            val intent = Intent(this, ModProdukActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -177,12 +179,22 @@ class DataProdukActivity : AppCompatActivity() {
                     val produk = dataSnapshot.getValue(ModelProduk::class.java)
                     if (produk != null) {
                         produk.idProduk = dataSnapshot.key ?: ""
-                        listProduk.add(produk)
-                        listProdukOriginal.add(produk)
+
+                        // Load nama kategori
+                        if (produk.idKategori.isNotEmpty()) {
+                            loadKategoriName(produk.idKategori) { namaKategori ->
+                                produk.namaKategori = namaKategori
+                                listProduk.add(produk)
+                                listProdukOriginal.add(produk)
+                                adapter.notifyDataSetChanged()
+                            }
+                        } else {
+                            listProduk.add(produk)
+                            listProdukOriginal.add(produk)
+                            adapter.notifyDataSetChanged()
+                        }
                     }
                 }
-
-                adapter.notifyDataSetChanged()
 
                 if (listProduk.isEmpty()) {
                     Toast.makeText(this@DataProdukActivity, "Tidak ada data produk", Toast.LENGTH_SHORT).show()
@@ -191,6 +203,19 @@ class DataProdukActivity : AppCompatActivity() {
 
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(this@DataProdukActivity, "Gagal memuat data: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun loadKategoriName(kategoriId: String, callback: (String) -> Unit) {
+        val kategoriRef = FirebaseDatabase.getInstance().getReference("kategori").child(kategoriId)
+        kategoriRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val kategori = snapshot.getValue(ModelKategori::class.java)
+                callback(kategori?.namaKategori ?: "Kategori")
+            }
+            override fun onCancelled(error: DatabaseError) {
+                callback("Kategori")
             }
         })
     }

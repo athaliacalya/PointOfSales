@@ -5,25 +5,26 @@
     android:id="@+id/card_produk"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="12dp"
-    android:layout_marginVertical="6dp"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginVertical="4dp"
     android:clickable="true"
     android:focusable="true"
     app:cardBackgroundColor="@android:color/white"
-    app:cardCornerRadius="14dp"
-    app:cardElevation="4dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="2dp"
     app:strokeWidth="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="8dp">
 
+        <!-- Card Image -->
         <androidx.cardview.widget.CardView
             android:id="@+id/card_image"
-            android:layout_width="84dp"
-            android:layout_height="84dp"
-            app:cardCornerRadius="10dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:cardCornerRadius="8dp"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,24 +35,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img_produkk"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                android:src="@drawable/ic_product" />
         </androidx.cardview.widget.CardView>
 
+        <!-- Nama Produk -->
         <TextView
             android:id="@+id/tv_nama_produk"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="12dp"
             android:text="Nama Produk"
             android:textColor="@android:color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/chip_status"
+            app:layout_constraintEnd_toStartOf="@+id/btn_delete"
             app:layout_constraintStart_toEndOf="@id/card_image"
             app:layout_constraintTop_toTopOf="@id/card_image" />
 
+        <!-- Harga Produk -->
         <TextView
             android:id="@+id/tv_harga_produk"
             android:layout_width="0dp"
@@ -59,109 +60,74 @@
             android:layout_marginTop="2dp"
             android:text="Harga"
             android:textColor="@android:color/black"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/tv_nama_produk"
             app:layout_constraintStart_toStartOf="@id/tv_nama_produk"
             app:layout_constraintTop_toBottomOf="@id/tv_nama_produk" />
 
         <!-- Stok -->
-        <LinearLayout
-            android:id="@+id/ll_stok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            app:layout_constraintStart_toStartOf="@id/tv_nama_produk"
-            app:layout_constraintTop_toBottomOf="@id/tv_harga_produk">
-
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:src="@android:drawable/ic_menu_info_details"
-                app:tint="#666666" />
-
-            <TextView
-                android:id="@+id/tv_stok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:text="Stok: 0"
-                android:textColor="#666666"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <!-- Kategori -->
-        <LinearLayout
-            android:id="@+id/ll_kategori"
+        <TextView
+            android:id="@+id/tv_stok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
+            android:text="Stok: 0"
+            android:textColor="#666666"
+            android:textSize="11sp"
             app:layout_constraintStart_toStartOf="@id/tv_nama_produk"
-            app:layout_constraintTop_toBottomOf="@id/ll_stok">
+            app:layout_constraintTop_toBottomOf="@id/tv_harga_produk" />
 
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:src="@android:drawable/ic_menu_info_details"
-                app:tint="#666666" />
-
-            <TextView
-                android:id="@+id/tv_kategori"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:text="Kategori"
-                android:textColor="#666666"
-                android:textSize="12sp" />
-        </LinearLayout>
-
-        <!-- Cabang -->
-        <LinearLayout
-            android:id="@+id/ll_cabang"
+        <!-- Kategori -->
+        <TextView
+            android:id="@+id/tv_kategori"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@id/ll_kategori"
-            app:layout_constraintStart_toEndOf="@id/ll_kategori"
-            app:layout_constraintTop_toTopOf="@id/ll_kategori">
+            android:layout_marginTop="4dp"
+            android:text="Kategori"
+            android:textColor="#666666"
+            android:textSize="11sp"
+            app:layout_constraintStart_toStartOf="@id/tv_nama_produk"
+            app:layout_constraintTop_toBottomOf="@id/tv_stok" />
 
-            <ImageView
-                android:layout_width="12dp"
-                android:layout_height="12dp"
-                android:src="@android:drawable/ic_menu_info_details"
-                app:tint="#666666" />
-
-            <TextView
-                android:id="@+id/tv_cabang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6px"
-                android:text="Cabang"
-                android:textColor="#666666"
-                android:textSize="12sp" />
-        </LinearLayout>
-
+        <!-- Status Chip -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_status"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginStart="12dp"
             android:text="Aktif"
-            android:textColor="#4CAF50"
-            android:textSize="11sp"
+            android:textColor="#FFFF"
+            android:textSize="9sp"
             app:chipBackgroundColor="@android:color/transparent"
-            app:chipIconVisible="true"
-            app:chipMinHeight="32dp"
             app:chipStrokeColor="#4CAF50"
-            app:chipStrokeWidth="1dp"
-            app:iconStartPadding="6dp"
+            app:chipStrokeWidth="15dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_kategori"
+            app:layout_constraintStart_toEndOf="@id/tv_kategori"
+            app:layout_constraintTop_toTopOf="@id/tv_kategori" />
+
+        <!-- Tombol Edit -->
+        <ImageView
+            android:id="@+id/btn_edit"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_edit"
+            android:padding="5dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintBottom_toBottomOf="@id/btn_delete"
+            app:layout_constraintEnd_toStartOf="@id/btn_delete"
+            app:layout_constraintTop_toTopOf="@id/btn_delete" />
+
+        <!-- Tombol Delete -->
+        <ImageView
+            android:id="@+id/btn_delete"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_delete"
+            android:padding="5dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/card_image"/>
+            app:layout_constraintTop_toTopOf="@id/card_image" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

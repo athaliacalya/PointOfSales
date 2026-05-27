@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.athalia.sellio.R
 import com.athalia.sellio.model.ModelProduk
+import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 import java.text.NumberFormat
 import java.util.Locale
@@ -56,50 +57,51 @@ class ProdukAdapter(
         private val chipStatus: Chip = itemView.findViewById(R.id.chip_status)
         private val tvStok: TextView = itemView.findViewById(R.id.tv_stok)
         private val tvKategori: TextView = itemView.findViewById(R.id.tv_kategori)
-        private val tvCabang: TextView = itemView.findViewById(R.id.tv_cabang)
+        private val btnEdit: ImageView = itemView.findViewById(R.id.btn_edit)
+        private val btnDelete: ImageView = itemView.findViewById(R.id.btn_delete)
 
         fun bind(produk: ModelProduk) {
             // Set nama produk
-            tvNamaProduk.text = if (produk.namaProduk.isNotEmpty()) produk.namaProduk else "Produk"
+            tvNamaProduk.text = produk.namaProduk.ifEmpty { "Produk" }
 
             // Set harga produk (format Rupiah)
             tvHargaProduk.text = formatRupiah(produk.hargaProduk)
 
             // Set stok
-            val stokText = if (produk.stokProduk > 0) "Stok: ${produk.stokProduk}" else "Stok: Habis"
-            tvStok.text = stokText
+            tvStok.text = if (produk.stokProduk > 0) "Stok: ${produk.stokProduk}" else "Stok: Habis"
 
-            // Set kategori
-            tvKategori.text = if (produk.namaKategori.isNotEmpty()) produk.namaKategori else "Kategori"
+            // Set kategori - tampilkan nama kategori
+            if (produk.namaKategori.isNotEmpty()) {
+                tvKategori.text = produk.namaKategori
+            } else {
+                tvKategori.text = "Kategori: -"
+            }
 
-            // Set cabang
-            tvCabang.text = if (produk.namaCabang.isNotEmpty()) produk.namaCabang else "Cabang"
-
-            // Set status chip
+            // Set status chip dengan warna yang sesuai
             when (produk.statusProduk) {
                 "1", "aktif", "Aktif" -> {
                     chipStatus.text = "Aktif"
                     chipStatus.setTextColor(Color.parseColor("#4CAF50"))
-                    chipStatus.chipStrokeColor = ColorStateList.valueOf(
-                        Color.parseColor("#4CAF50")
-                    )
+                    chipStatus.chipStrokeColor = ColorStateList.valueOf(Color.parseColor("#4CAF50"))
                     chipStatus.chipBackgroundColor = ColorStateList.valueOf(Color.TRANSPARENT)
+                    chipStatus.chipStrokeWidth = 1f
                 }
                 else -> {
                     chipStatus.text = "Tidak Aktif"
                     chipStatus.setTextColor(Color.parseColor("#F44336"))
-                    chipStatus.chipStrokeColor = ColorStateList.valueOf(
-                        Color.parseColor("#F44336")
-                    )
+                    chipStatus.chipStrokeColor = ColorStateList.valueOf(Color.parseColor("#F44336"))
                     chipStatus.chipBackgroundColor = ColorStateList.valueOf(Color.TRANSPARENT)
+                    chipStatus.chipStrokeWidth = 1f
                 }
             }
 
-            // Set gambar produk (tanpa Glide - langsung dari resource)
-            // Jika ingin menampilkan gambar dari URL nanti, bisa ditambahkan library lain
+            // Load gambar produk dengan Glide
             if (produk.fotoProduk.isNotEmpty()) {
-                // Sementara pakai icon default, nanti bisa diganti dengan library lain
-                imgProduk.setImageResource(R.drawable.ic_product)
+                Glide.with(itemView.context)
+                    .load(produk.fotoProduk)
+                    .placeholder(R.drawable.ic_product)
+                    .error(R.drawable.ic_product)
+                    .into(imgProduk)
             } else {
                 imgProduk.setImageResource(R.drawable.ic_product)
             }
@@ -107,6 +109,16 @@ class ProdukAdapter(
             // Klik item
             itemView.setOnClickListener {
                 listener?.onItemClick(produk)
+            }
+
+            // Tombol edit - pindah ke ModProdukActivity
+            btnEdit.setOnClickListener {
+                listener?.onEditClick(produk)
+            }
+
+            // Tombol delete
+            btnDelete.setOnClickListener {
+                listener?.onDeleteClick(produk)
             }
         }
 
