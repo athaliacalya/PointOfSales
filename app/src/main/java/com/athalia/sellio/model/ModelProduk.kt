@@ -2,45 +2,70 @@ package com.athalia.sellio.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import java.util.NavigableMap
 
 data class ModelProduk(
-    val idProduk: String = null,
-    val namaProduk: String? = null,
-    val hargaProduk: Int? = 0,
-    val idKategori: String? = null,
-    val idCabang: String? = null,
-    val fotoProduk: String? = null,
-    val stokProduk: Int? = 0,
-    val tanpaBatas: Boolean? = false,
-    val statusProduk: String? = null,
-    var createdAT: String? = null,
-    var updatedAt: String? = null
+    var idProduk: String = "",
+    var namaProduk: String = "",
+    var hargaProduk: Int = 0,
+    var idKategori: String = "",
+    var idCabang: String = "",
+    var fotoProduk: String = "",
+    var stokProduk: Int = 0,
+    var tanpaBatas: Boolean = false,
+    var statusProduk: String = "1",
+    var createdAt: String = "",
+    var updatedAt: String = ""
 ) : Parcelable {
 
+    // Properti tambahan yang tidak disimpan ke Parcel
     var jumlahTerjual: Int = 0
         get() = field
-        set(value) {field = value}
+        set(value) { field = value }
 
+    // Properti tambahan untuk keperluan tampilan
+    var namaKategori: String = ""
+    var namaCabang: String = ""
+
+    // Constructor dari Parcel
     constructor(parcel: Parcel) : this(
-        idProduk = parcel.readString(),
-        namaProduk = parcel.readString(),
-        hargaProduk = parcel.readValue(Int::class.java.classLoader) as? Int,
-        idKategori = parcel.readString(),
-        idCabang = parcel.readString(),
-        fotoProduk = parcel.readString(),
-        stokProduk = parcel.readValue(Int::class.java.classLoader) as? Int,
-        tanpaBatas = parcel.readValue(Boolean::class.java.classLoader) as? Int,
-        statusProduk = parcel.readString(),
-        createdAt = parcel.readString(),
-        updatedAt = parcel.readString()
+        idProduk = parcel.readString() ?: "",
+        namaProduk = parcel.readString() ?: "",
+        hargaProduk = parcel.readInt(),
+        idKategori = parcel.readString() ?: "",
+        idCabang = parcel.readString() ?: "",
+        fotoProduk = parcel.readString() ?: "",
+        stokProduk = parcel.readInt(),
+        tanpaBatas = parcel.readByte() != 0.toByte(),
+        statusProduk = parcel.readString() ?: "1",
+        createdAt = parcel.readString() ?: "",
+        updatedAt = parcel.readString() ?: ""
     )
 
-    override fun ariteToParcel(parcel: Parcel, flags: Int) {
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(idProduk)
         parcel.writeString(namaProduk)
-        parcel.writeValue(hargaProduk)
+        parcel.writeInt(hargaProduk)
         parcel.writeString(idKategori)
         parcel.writeString(idCabang)
+        parcel.writeString(fotoProduk)
+        parcel.writeInt(stokProduk)
+        parcel.writeByte(if (tanpaBatas) 1 else 0)
+        parcel.writeString(statusProduk)
+        parcel.writeString(createdAt)
+        parcel.writeString(updatedAt)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<ModelProduk> {
+        override fun createFromParcel(parcel: Parcel): ModelProduk {
+            return ModelProduk(parcel)
+        }
+
+        override fun newArray(size: Int): Array<ModelProduk?> {
+            return arrayOfNulls(size)
+        }
     }
 }

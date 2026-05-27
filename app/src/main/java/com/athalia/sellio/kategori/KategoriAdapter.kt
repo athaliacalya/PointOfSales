@@ -17,7 +17,7 @@ class KategoriAdapter(
 
     class KategoriViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val cardKategori: MaterialCardView = itemView.findViewById(R.id.cardKategori)
-        val txtNamaKategori: TextView = itemView.findViewById(R.id.txtNamaKategori)
+        val txtNamaKategori: TextView = itemView.findViewById(R.id.tvNamaKategori)
         val chipStatus: Chip = itemView.findViewById(R.id.chipStatus)
     }
 

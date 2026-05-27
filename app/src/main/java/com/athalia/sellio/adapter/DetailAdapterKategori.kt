@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.athalia.sellio.R
@@ -17,6 +18,8 @@ class DetailAdapterKategori(private val kategoriList: List<ModelKategori>) :
 
     interface OnItemClickListener {
         fun onItemClick(kategori: ModelKategori)
+        fun onEditClick(kategori: ModelKategori)
+        fun onDeleteClick(kategori: ModelKategori)
     }
 
     private var listener: OnItemClickListener? = null
@@ -42,15 +45,44 @@ class DetailAdapterKategori(private val kategoriList: List<ModelKategori>) :
 
     inner class KategoriViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val txtNamaKategori: TextView = itemView.findViewById(R.id.txtNamaKategori)
+        val tvNamaKategori: TextView = itemView.findViewById(R.id.tvNamaKategori)
         val chipStatus: Chip = itemView.findViewById(R.id.chipStatus)
+        val btnEditKategori: ImageView = itemView.findViewById(R.id.btnEditKategori)
+        val btnDeleteKategori: ImageView = itemView.findViewById(R.id.btnDeleteKategori)
+        val imgKategori: ImageView = itemView.findViewById(R.id.imgKategori)
 
         fun bind(kategori: ModelKategori) {
-            txtNamaKategori.text = kategori.namaKategori
-            chipStatus.text = "Aktif"
+            tvNamaKategori.text = kategori.namaKategori ?: ""
 
+            // Set status chip berdasarkan statusKategori ("1" = aktif, "0" = tidak aktif)
+            when (kategori.statusKategori) {
+                "1" -> {
+                    chipStatus.text = "Aktif"
+                    chipStatus.setTextColor(android.graphics.Color.parseColor("#4CAF50"))
+                }
+                "0" -> {
+                    chipStatus.text = "Tidak Aktif"
+                    chipStatus.setTextColor(android.graphics.Color.parseColor("#F44336"))
+                }
+                else -> {
+                    chipStatus.text = "Aktif"
+                    chipStatus.setTextColor(android.graphics.Color.parseColor("#4CAF50"))
+                }
+            }
+
+            // Klik pada card
             itemView.setOnClickListener {
                 listener?.onItemClick(kategori)
+            }
+
+            // Klik tombol edit
+            btnEditKategori.setOnClickListener {
+                listener?.onEditClick(kategori)
+            }
+
+            // Klik tombol delete
+            btnDeleteKategori.setOnClickListener {
+                listener?.onDeleteClick(kategori)
             }
         }
     }
