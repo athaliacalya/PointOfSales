@@ -6,6 +6,7 @@
     android:paddingVertical="8dp"
     android:gravity="center_vertical">
 
+    <!-- Info Produk -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -31,54 +32,62 @@
 
     </LinearLayout>
 
+    <!-- Kontrol Jumlah -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
+        <!-- Tombol Minus -->
         <ImageButton
             android:id="@+id/btnMinus"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:src="@drawable/ic_minus"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="8dp" />
+            android:padding="6dp" />
 
+        <!-- Jumlah -->
         <TextView
             android:id="@+id/tvJumlah"
-            android:layout_width="40dp"
+            android:layout_width="32dp"
             android:layout_height="wrap_content"
             android:text="1"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="14sp" />
 
+        <!-- Tombol Plus -->
         <ImageButton
             android:id="@+id/btnPlus"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:src="@drawable/ic_plus"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="8dp" />
+            android:padding="6dp" />
 
+        <!-- Subtotal -->
         <TextView
             android:id="@+id/tvSubtotal"
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:text="Rp 0"
             android:textAlignment="viewEnd"
             android:textColor="#386373"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp" />
 
+        <!-- Tombol Delete -->
         <ImageButton
             android:id="@+id/btnDelete"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:src="@drawable/ic_delete"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_deletes"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="6dp" />
+            android:padding="6dp"
+            android:layout_marginStart="4dp" />
 
     </LinearLayout>
 

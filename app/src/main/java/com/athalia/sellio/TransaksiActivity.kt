@@ -1,6 +1,7 @@
 package com.athalia.sellio
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
@@ -30,7 +32,6 @@ import java.io.FileOutputStream
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import android.content.Intent
 
 class TransaksiActivity : AppCompatActivity() {
 
@@ -135,22 +136,48 @@ class TransaksiActivity : AppCompatActivity() {
     }
 
     private fun tambahKeKeranjang(produk: ModelProduk) {
+
+        // Cek stok produk
         if (produk.stokProduk <= 0) {
-            Toast.makeText(this, "Stok ${produk.namaProduk} habis!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                "Stok ${produk.namaProduk} habis!",
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
 
-        val existingItem = keranjangItems.find { it.idProduk == produk.idProduk }
+        // Cari item yang sudah ada di keranjang
+        val existingItem = keranjangItems.find {
+            it.idProduk == produk.idProduk
+        }
 
+        // Jika item sudah ada
         if (existingItem != null) {
+
+            // Cek stok mencukupi
             if (existingItem.jumlah >= produk.stokProduk) {
-                Toast.makeText(this, "Stok tidak mencukupi!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Stok tidak mencukupi!",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return
             }
+
+            // Tambah jumlah
             existingItem.jumlah++
-            existingItem.subtotal = existingItem.harga.toLong() * existingItem.jumlah
+
+            // Update subtotal
+            existingItem.subtotal =
+                existingItem.harga.toLong() * existingItem.jumlah
+
+            // Refresh RecyclerView
             keranjangAdapter.notifyDataSetChanged()
+
         } else {
+
+            // Tambahkan item baru
             val item = ItemTransaksi(
                 idProduk = produk.idProduk,
                 namaProduk = produk.namaProduk,
@@ -158,14 +185,17 @@ class TransaksiActivity : AppCompatActivity() {
                 jumlah = 1,
                 subtotal = produk.hargaProduk.toLong()
             )
-            keranjangItems.add(item)
-            keranjangAdapter.notifyItemInserted(keranjangItems.size - 1)
-        }
-        updateTotal()
 
-        bottomSheet.post {
-            bottomSheet.scrollBy(0, bottomSheet.height)
+            keranjangItems.add(item)
+
+            // Notify item baru
+            keranjangAdapter.notifyItemInserted(
+                keranjangItems.size - 1
+            )
         }
+
+        // Update total harga
+        updateTotal()
     }
 
     private fun updateTotal() {
@@ -213,19 +243,29 @@ class TransaksiActivity : AppCompatActivity() {
 
     private fun showPaymentDialog() {
         val total = keranjangItems.sumOf { it.subtotal }
+
+        // Hitung pajak 10% dan total dengan pajak
+        val pajak = (total * 0.1).toLong()
+        val totalDenganPajak = total + pajak
+
         val view = LayoutInflater.from(this).inflate(R.layout.dialog_pembayaran, null)
-        val etJumlahBayar = view.findViewById<EditText>(R.id.etJumlahBayar)
+        val tvSubtotalDialog = view.findViewById<TextView>(R.id.tvSubtotalDialog)
+        val tvPajakDialog = view.findViewById<TextView>(R.id.tvPajakDialog)
         val tvTotalDialog = view.findViewById<TextView>(R.id.tvTotalDialog)
+        val etJumlahBayar = view.findViewById<EditText>(R.id.etJumlahBayar)
         val tvKembali = view.findViewById<TextView>(R.id.tvKembali)
 
-        tvTotalDialog.text = formatRupiah(total)
+        // Tampilkan rincian
+        tvSubtotalDialog.text = formatRupiah(total)
+        tvPajakDialog.text = formatRupiah(pajak)
+        tvTotalDialog.text = formatRupiah(totalDenganPajak)
 
         etJumlahBayar.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 val bayar = s.toString().toLongOrNull() ?: 0
-                val kembali = bayar - total
+                val kembali = bayar - totalDenganPajak
                 tvKembali.text = if (kembali >= 0) formatRupiah(kembali) else "Kurang!"
             }
         })
@@ -235,7 +275,7 @@ class TransaksiActivity : AppCompatActivity() {
             .setView(view)
             .setPositiveButton("Selesai") { _, _ ->
                 val bayar = etJumlahBayar.text.toString().toLongOrNull() ?: 0
-                if (bayar >= total) {
+                if (bayar >= totalDenganPajak) {
                     simpanTransaksi(total, bayar)
                 } else {
                     Toast.makeText(this, "Jumlah bayar kurang!", Toast.LENGTH_SHORT).show()
@@ -249,9 +289,11 @@ class TransaksiActivity : AppCompatActivity() {
         val calendar = Calendar.getInstance()
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale("id", "ID"))
         val timeFormat = SimpleDateFormat("HH:mm:ss", Locale("id", "ID"))
-        val id = database.child("transaksi").push().key ?: ""
+
+        val id = generateTransactionId()
         currentTransaksiId = id
 
+        // Hitung pajak 10%
         val pajak = (total * 0.1).toLong()
         val totalDenganPajak = total + pajak
 
@@ -274,6 +316,7 @@ class TransaksiActivity : AppCompatActivity() {
 
         database.child("transaksi").child(id).setValue(transaksi)
             .addOnSuccessListener {
+                // Kurangi stok produk
                 for (item in keranjangItems) {
                     database.child("produk").child(item.idProduk).child("stokProduk")
                         .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -298,19 +341,30 @@ class TransaksiActivity : AppCompatActivity() {
             }
     }
 
+    // Fungsi untuk generate ID Transaksi unik
+    private fun generateTransactionId(): String {
+        val dateFormat = SimpleDateFormat("ddMMyyyyHHmmss", Locale("id", "ID"))
+        val timestamp = dateFormat.format(Date())
+        val random = (100..999).random()
+        return "TRX${timestamp}${random}"
+    }
+
     private fun showReceiptDialog(transaksi: ModelTransaksi) {
         val view = LayoutInflater.from(this).inflate(R.layout.dialog_struk, null)
         val tvNoTransaksi = view.findViewById<TextView>(R.id.tvNoTransaksi)
         val tvTanggal = view.findViewById<TextView>(R.id.tvTanggal)
         val rvItemTransaksi = view.findViewById<RecyclerView>(R.id.rvItemTransaksi)
         val tvJumlahItemStruk = view.findViewById<TextView>(R.id.tvJumlahItemStruk)
+        val tvSubtotal = view.findViewById<TextView>(R.id.tvSubtotal)
+        val tvPajak = view.findViewById<TextView>(R.id.tvPajak)
+        val tvTotalStruk = view.findViewById<TextView>(R.id.tvTotalStruk)
         val tvBayar = view.findViewById<TextView>(R.id.tvBayar)
         val tvKembaliStruk = view.findViewById<TextView>(R.id.tvKembaliStruk)
         val btnDownload = view.findViewById<MaterialButton>(R.id.btnDownload)
         val btnPrint = view.findViewById<MaterialButton>(R.id.btnPrint)
 
-        val noTransaksi = transaksi.idTransaksi.takeLast(12)
-        tvNoTransaksi.text = noTransaksi
+        // Tampilkan ID Transaksi (bisa full atau sebagian)
+        tvNoTransaksi.text = transaksi.idTransaksi
 
         val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale("id", "ID"))
         tvTanggal.text = "${dateFormat.format(Date())} WIB"
@@ -322,6 +376,9 @@ class TransaksiActivity : AppCompatActivity() {
         val totalItem = transaksi.items.sumOf { it.jumlah }
         tvJumlahItemStruk.text = totalItem.toString()
 
+        tvSubtotal.text = formatRupiahTanpaRp(transaksi.subtotal)
+        tvPajak.text = formatRupiahTanpaRp(transaksi.pajak)
+        tvTotalStruk.text = formatRupiahTanpaRp(transaksi.total)
         tvBayar.text = formatRupiahTanpaRp(transaksi.bayar)
         tvKembaliStruk.text = formatRupiahTanpaRp(transaksi.kembali)
 
@@ -353,10 +410,10 @@ class TransaksiActivity : AppCompatActivity() {
             outputStream.close()
 
             val uri = FileProvider.getUriForFile(this, "${packageName}.provider", file)
-            val intent = android.content.Intent(android.content.Intent.ACTION_SEND).apply {
+            val intent = Intent(Intent.ACTION_SEND).apply {
                 type = "image/png"
-                putExtra(android.content.Intent.EXTRA_STREAM, uri)
-                addFlags(android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                putExtra(Intent.EXTRA_STREAM, uri)
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             }
             startActivity(Intent.createChooser(intent, "Bagikan Struk"))
         } catch (e: Exception) {
@@ -374,8 +431,13 @@ class TransaksiActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 listProduk.clear()
                 listProdukOriginal.clear()
+
+                Log.d("Transaksi", "Jumlah data dari Firebase: ${snapshot.childrenCount}")
+
                 for (dataSnapshot in snapshot.children) {
                     val produk = dataSnapshot.getValue(ModelProduk::class.java)
+                    Log.d("Transaksi", "Produk: ${produk?.namaProduk}, Status: ${produk?.statusProduk}")
+
                     if (produk != null && produk.statusProduk == "1") {
                         produk.idProduk = dataSnapshot.key ?: ""
                         if (produk.stokProduk > 0) {
@@ -384,10 +446,18 @@ class TransaksiActivity : AppCompatActivity() {
                         listProdukOriginal.add(produk)
                     }
                 }
+
+                Log.d("Transaksi", "List produk size: ${listProduk.size}")
                 produkAdapter.notifyDataSetChanged()
+
+                if (listProduk.isEmpty()) {
+                    Toast.makeText(this@TransaksiActivity, "Tidak ada produk. Silakan tambah produk terlebih dahulu", Toast.LENGTH_LONG).show()
+                }
             }
+
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@TransaksiActivity, "Gagal memuat produk", Toast.LENGTH_SHORT).show()
+                Log.e("Transaksi", "Error: ${error.message}")
+                Toast.makeText(this@TransaksiActivity, "Gagal memuat produk: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }

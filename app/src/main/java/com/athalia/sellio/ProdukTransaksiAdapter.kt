@@ -24,7 +24,7 @@ class ProdukTransaksiAdapter(
         holder.bind(produkList[position])
     }
 
-    override fun getItemCount(): Int = produkList.size
+    override fun getItemCount() = produkList.size
 
     inner class ProdukViewHolder(
         private val binding: ItemProdukTransaksiBinding
