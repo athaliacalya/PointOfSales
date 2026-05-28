@@ -8,9 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.athalia.sellio.kategori.DataCabangActivity      // Tambahkan import ini
 import com.athalia.sellio.kategori.DataKategoriActivity
 import com.athalia.sellio.kategori.DataPegawaiActivity
-import com.athalia.sellio.kategori.DataProdukActivity  // Tambahkan import ini
+import com.athalia.sellio.kategori.DataProdukActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,9 +35,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, DataKategoriActivity::class.java))
         }
 
-        // Card Produk / Menu - Perbaiki nama class
+        // Card Produk / Menu
         findViewById<CardView>(R.id.cardProduk)?.setOnClickListener {
-            startActivity(Intent(this, DataProdukActivity::class.java))  // Ganti dengan DataProdukActivity
+            startActivity(Intent(this, DataProdukActivity::class.java))
         }
 
         // Card Pegawai
@@ -44,15 +45,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, DataPegawaiActivity::class.java))
         }
 
-        // Card lainnya (opsional)
+        // Card Cabang
+        findViewById<CardView>(R.id.cardCabang)?.setOnClickListener {
+            startActivity(Intent(this, DataCabangActivity::class.java))
+        }
+
+        // Card Akun (opsional)
         findViewById<CardView>(R.id.cardAkun)?.setOnClickListener {
             Toast.makeText(this, "Fitur Akun sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
         }
 
-        findViewById<CardView>(R.id.cardCabang)?.setOnClickListener {
-            Toast.makeText(this, "Fitur Cabang sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
-        }
-
+        // Card Printer (opsional)
         findViewById<CardView>(R.id.cardPrinter)?.setOnClickListener {
             Toast.makeText(this, "Fitur Printer sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
         }
