@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.athalia.sellio.kategori.DataCabangActivity      // Tambahkan import ini
+import com.athalia.sellio.kategori.DataCabangActivity
 import com.athalia.sellio.kategori.DataKategoriActivity
 import com.athalia.sellio.kategori.DataPegawaiActivity
 import com.athalia.sellio.kategori.DataProdukActivity
@@ -50,9 +50,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, DataCabangActivity::class.java))
         }
 
-        // Card Akun (opsional)
+        // Card Akun - Tambahkan Intent ke activity_akun
         findViewById<CardView>(R.id.cardAkun)?.setOnClickListener {
-            Toast.makeText(this, "Fitur Akun sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, activity_akun::class.java))
         }
 
         // Card Printer (opsional)

@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Izin untuk internet dan storage -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -10,20 +15,27 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Sellio">
-        <activity
-            android:name=".activity_akun"
-            android:exported="false" />
+        android:theme="@style/Theme.Sellio"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+
         <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Kategori Activities -->
+        </activity>
+
+        <!-- Akun Activity -->
+        <activity
+            android:name=".activity_akun"
+            android:exported="false" />
+
+        <!-- Kategori Activities -->
         <activity
             android:name=".kategori.DataKategoriActivity"
             android:exported="false" />
@@ -32,28 +44,37 @@
             android:exported="false" />
         <activity
             android:name=".kategori.activity_edit_kategori"
-            android:exported="false" /> <!-- Produk Activities -->
+            android:exported="false" />
+
+        <!-- Produk Activities -->
         <activity
             android:name=".kategori.DataProdukActivity"
             android:exported="false" />
         <activity
             android:name=".kategori.ModProdukActivity"
-            android:exported="false" /> <!-- Pegawai Activities -->
+            android:exported="false" />
+
+        <!-- Pegawai Activities -->
         <activity
             android:name=".kategori.DataPegawaiActivity"
             android:exported="false" />
         <activity
             android:name=".kategori.ModPegawaiActivity"
-            android:exported="false" /> <!-- Cabang Activities -->
+            android:exported="false" />
+
+        <!-- Cabang Activities -->
         <activity
             android:name=".kategori.DataCabangActivity"
             android:exported="false" />
         <activity
             android:name=".kategori.ModCabangActivity"
-            android:exported="false" /> <!-- Other Activities -->
+            android:exported="false" />
+
+        <!-- Transaksi Activity -->
         <activity
             android:name=".activity_transaksi"
             android:exported="false" />
+
     </application>
 
 </manifest>

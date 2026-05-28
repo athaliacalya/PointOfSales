@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.athalia.sellio"
-    compileSdk = 36  // Upgrade ke 36
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.athalia.sellio"
         minSdk = 24
-        targetSdk = 36  // Sesuaikan dengan compileSdk
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -36,6 +36,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -45,11 +49,19 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.firebase.database)
+
+    // RecyclerView
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+
+    // CardView
+    implementation("androidx.cardview:cardview:1.0.0")
+
+    // Glide untuk loading gambar
     implementation("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
-    implementation("androidx.cardview:cardview:1.0.0")
+    // Firebase Storage untuk upload foto
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
