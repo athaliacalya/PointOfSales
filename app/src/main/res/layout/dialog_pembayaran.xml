@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total yang harus dibayar:"
+        android:textSize="14sp"
+        android:textColor="#666666" />
+
+    <TextView
+        android:id="@+id/tvTotalDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp 0"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#386373"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jumlah Bayar:"
+        android:textSize="14sp"
+        android:textColor="#666666" />
+
+    <EditText
+        android:id="@+id/etJumlahBayar"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:hint="Masukkan jumlah bayar"
+        android:inputType="number"
+        android:padding="12dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:drawable/editbox_background"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kembalian:"
+        android:layout_marginTop="16dp"
+        android:textSize="14sp"
+        android:textColor="#666666" />
+
+    <TextView
+        android:id="@+id/tvKembali"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp 0"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#4CAF50" />
+
+</LinearLayout>

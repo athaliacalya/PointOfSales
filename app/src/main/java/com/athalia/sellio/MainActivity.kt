@@ -15,6 +15,10 @@ import com.athalia.sellio.kategori.DataCabangActivity
 import com.athalia.sellio.kategori.DataKategoriActivity
 import com.athalia.sellio.kategori.DataPegawaiActivity
 import com.athalia.sellio.kategori.DataProdukActivity
+// Hapus import yang salah
+// import com.athalia.sellio.viewmodel.DataPelangganActivity
+// Ganti dengan import yang benar
+import com.athalia.sellio.DataPelangganActivity
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -44,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         setupClickListeners()
         startRealTimeClock()
 
-        // Estimasi sementara (nanti bisa diisi dari Firebase)
         tvEstimasi.text = formatRupiah(0)
     }
 
@@ -120,6 +123,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, DataCabangActivity::class.java))
         }
 
+        // Card Pelanggan (View biasa, bukan CardView)
+        findViewById<android.view.View>(R.id.cardPelanggan)?.setOnClickListener {
+            startActivity(Intent(this, DataPelangganActivity::class.java))
+        }
+
         // Card Printer
         findViewById<CardView>(R.id.cardPrinter)?.setOnClickListener {
             Toast.makeText(this, "Fitur Printer sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
@@ -127,12 +135,7 @@ class MainActivity : AppCompatActivity() {
 
         // Card Transaksi
         findViewById<android.view.View>(R.id.cardTransaksi)?.setOnClickListener {
-            Toast.makeText(this, "Fitur Transaksi sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
-        }
-
-        // Card Pelanggan
-        findViewById<android.view.View>(R.id.cardPelanggan)?.setOnClickListener {
-            Toast.makeText(this, "Fitur Pelanggan sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, TransaksiActivity::class.java))
         }
 
         // Card Laporan
