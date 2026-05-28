@@ -15,10 +15,8 @@ import com.athalia.sellio.kategori.DataCabangActivity
 import com.athalia.sellio.kategori.DataKategoriActivity
 import com.athalia.sellio.kategori.DataPegawaiActivity
 import com.athalia.sellio.kategori.DataProdukActivity
-// Hapus import yang salah
-// import com.athalia.sellio.viewmodel.DataPelangganActivity
-// Ganti dengan import yang benar
 import com.athalia.sellio.DataPelangganActivity
+import com.athalia.sellio.RiwayatTransaksiActivity  // Tambahkan import ini
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -123,7 +121,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, DataCabangActivity::class.java))
         }
 
-        // Card Pelanggan (View biasa, bukan CardView)
+        // Card Pelanggan
         findViewById<android.view.View>(R.id.cardPelanggan)?.setOnClickListener {
             startActivity(Intent(this, DataPelangganActivity::class.java))
         }
@@ -138,9 +136,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, TransaksiActivity::class.java))
         }
 
-        // Card Laporan
+        // Card Laporan - Riwayat Transaksi
         findViewById<android.view.View>(R.id.cardLaporan)?.setOnClickListener {
-            Toast.makeText(this, "Fitur Laporan sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, RiwayatTransaksiActivity::class.java))
         }
     }
 

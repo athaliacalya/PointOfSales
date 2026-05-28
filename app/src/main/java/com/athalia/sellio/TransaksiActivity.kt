@@ -351,6 +351,7 @@ class TransaksiActivity : AppCompatActivity() {
 
     private fun showReceiptDialog(transaksi: ModelTransaksi) {
         val view = LayoutInflater.from(this).inflate(R.layout.dialog_struk, null)
+
         val tvNoTransaksi = view.findViewById<TextView>(R.id.tvNoTransaksi)
         val tvTanggal = view.findViewById<TextView>(R.id.tvTanggal)
         val rvItemTransaksi = view.findViewById<RecyclerView>(R.id.rvItemTransaksi)
@@ -361,9 +362,7 @@ class TransaksiActivity : AppCompatActivity() {
         val tvBayar = view.findViewById<TextView>(R.id.tvBayar)
         val tvKembaliStruk = view.findViewById<TextView>(R.id.tvKembaliStruk)
         val btnDownload = view.findViewById<MaterialButton>(R.id.btnDownload)
-        val btnPrint = view.findViewById<MaterialButton>(R.id.btnPrint)
 
-        // Tampilkan ID Transaksi (bisa full atau sebagian)
         tvNoTransaksi.text = transaksi.idTransaksi
 
         val dateFormat = SimpleDateFormat("dd-MM-yyyy HH:mm", Locale("id", "ID"))
@@ -389,10 +388,7 @@ class TransaksiActivity : AppCompatActivity() {
 
         btnDownload.setOnClickListener {
             captureReceiptAndShare(view)
-        }
-
-        btnPrint.setOnClickListener {
-            Toast.makeText(this, "Fitur print akan segera hadir", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
         }
 
         dialog.show()
@@ -400,9 +396,17 @@ class TransaksiActivity : AppCompatActivity() {
 
     private fun captureReceiptAndShare(view: View) {
         try {
-            val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+            // Ambil layoutStruk yang berisi konten struk (tanpa tombol)
+            val receiptView = view.findViewById<ScrollView>(R.id.layoutStruk)
+
+            if (receiptView == null) {
+                Toast.makeText(this, "Gagal menemukan layout struk", Toast.LENGTH_SHORT).show()
+                return
+            }
+
+            val bitmap = Bitmap.createBitmap(receiptView.width, receiptView.height, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(bitmap)
-            view.draw(canvas)
+            receiptView.draw(canvas)
 
             val file = File(cacheDir, "receipt_${System.currentTimeMillis()}.png")
             val outputStream = FileOutputStream(file)
