@@ -11,19 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sellio">
-        <activity
-            android:name=".activity_edit_produk"
-            android:exported="false" />
+
         <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Kategori Activities -->
+        </activity>
+
+        <!-- Kategori Activities -->
         <activity
             android:name=".kategori.DataKategoriActivity"
             android:exported="false" />
@@ -32,19 +31,32 @@
             android:exported="false" />
         <activity
             android:name=".kategori.activity_edit_kategori"
-            android:exported="false" /> <!-- Produk Activities -->
+            android:exported="false" />
+
+        <!-- Produk Activities - Gunakan DataProdukActivity (bukan activity_data_produk) -->
         <activity
             android:name=".kategori.DataProdukActivity"
             android:exported="false" />
         <activity
             android:name=".kategori.ModProdukActivity"
-            android:exported="false" /> <!-- Other Activities -->
+            android:exported="false" />
+
+        <!-- Pegawai Activities -->
+        <activity
+            android:name=".kategori.DataPegawaiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".kategori.ModPegawaiActivity"
+            android:exported="false" />
+
+        <!-- Other Activities -->
         <activity
             android:name=".activity_cabang"
             android:exported="false" />
         <activity
             android:name=".activity_transaksi"
             android:exported="false" />
+
     </application>
 
 </manifest>

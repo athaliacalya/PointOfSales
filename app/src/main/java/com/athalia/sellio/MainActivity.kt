@@ -9,7 +9,8 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.athalia.sellio.kategori.DataKategoriActivity
-import com.athalia.sellio.kategori.DataProdukActivity
+import com.athalia.sellio.kategori.DataPegawaiActivity
+import com.athalia.sellio.kategori.DataProdukActivity  // Tambahkan import ini
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,23 +25,28 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        setupClickListeners()
+    }
+
+    private fun setupClickListeners() {
         // Card Kategori
         findViewById<CardView>(R.id.cardKategori)?.setOnClickListener {
             startActivity(Intent(this, DataKategoriActivity::class.java))
         }
 
-        // Card Produk / Menu
+        // Card Produk / Menu - Perbaiki nama class
         findViewById<CardView>(R.id.cardProduk)?.setOnClickListener {
-            startActivity(Intent(this, DataProdukActivity::class.java))
+            startActivity(Intent(this, DataProdukActivity::class.java))  // Ganti dengan DataProdukActivity
         }
 
-        // Card lainnya dengan Toast (sebagai placeholder)
+        // Card Pegawai
+        findViewById<CardView>(R.id.cardPegawai)?.setOnClickListener {
+            startActivity(Intent(this, DataPegawaiActivity::class.java))
+        }
+
+        // Card lainnya (opsional)
         findViewById<CardView>(R.id.cardAkun)?.setOnClickListener {
             Toast.makeText(this, "Fitur Akun sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
-        }
-
-        findViewById<CardView>(R.id.cardPegawai)?.setOnClickListener {
-            Toast.makeText(this, "Fitur Pegawai sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
         }
 
         findViewById<CardView>(R.id.cardCabang)?.setOnClickListener {
