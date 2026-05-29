@@ -1,6 +1,7 @@
 package com.athalia.sellio
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.activity.enableEdgeToEdge
@@ -31,6 +32,7 @@ class activity_akun : AppCompatActivity() {
     private lateinit var etDateOfBirth: TextInputEditText
     private lateinit var actGender: AutoCompleteTextView
     private lateinit var btnSimpan: MaterialButton
+    private lateinit var btnLogout: MaterialButton
 
     private lateinit var database: DatabaseReference
     private var isEditMode = false
@@ -71,6 +73,7 @@ class activity_akun : AppCompatActivity() {
         etDateOfBirth = findViewById(R.id.etDateOfBirth)
         actGender = findViewById(R.id.actGender)
         btnSimpan = findViewById(R.id.btnSimpan)
+        btnLogout = findViewById(R.id.btnLogout)
 
         database = FirebaseDatabase.getInstance().getReference("akun")
     }
@@ -117,6 +120,10 @@ class activity_akun : AppCompatActivity() {
         btnSimpan.setOnClickListener {
             simpanData()
         }
+
+        btnLogout.setOnClickListener {
+            performLogout()
+        }
     }
 
     private fun setEditMode(edit: Boolean) {
@@ -129,6 +136,7 @@ class activity_akun : AppCompatActivity() {
         etDateOfBirth.isEnabled = isEnabled
         actGender.isEnabled = isEnabled
         btnSimpan.visibility = if (edit) android.view.View.VISIBLE else android.view.View.GONE
+        btnLogout.visibility = if (edit) android.view.View.GONE else android.view.View.VISIBLE
         tvEdit.text = if (edit) "Batal" else "Edit"
 
         if (!edit) {
@@ -226,5 +234,17 @@ class activity_akun : AppCompatActivity() {
             .addOnFailureListener { error ->
                 Toast.makeText(this, "Gagal menyimpan: ${error.message}", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun performLogout() {
+        val sharedPreferences = getSharedPreferences("SellioPreferences", MODE_PRIVATE)
+        sharedPreferences.edit().clear().apply()
+
+        Toast.makeText(this, "Berhasil keluar", Toast.LENGTH_SHORT).show()
+
+        val loginIntent = Intent(this, LoginActivity::class.java)
+        loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(loginIntent)
+        finish()
     }
 }
