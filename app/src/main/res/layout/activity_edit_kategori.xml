@@ -30,7 +30,7 @@
         android:text="Edit Kategori"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="@color/text_primary"
         app:layout_constraintStart_toEndOf="@id/ic_back"
         app:layout_constraintTop_toTopOf="@id/ic_back"
         app:layout_constraintBottom_toBottomOf="@id/ic_back"
@@ -93,7 +93,7 @@
             android:layout_weight="1"
             android:text="Aktif"
             android:textSize="16sp"
-            android:textColor="@android:color/black" />
+            android:textColor="@color/text_primary" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switchStatus"

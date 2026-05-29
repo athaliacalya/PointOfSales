@@ -7,7 +7,7 @@
     android:layout_margin="4dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="1dp"
-    app:cardBackgroundColor="#FFFFFF"
+    app:cardBackgroundColor="@color/card_bg"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground">
@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rp 0"
-            android:textColor="#386373"
+            android:textColor="@color/primary"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Stok: 0"
-            android:textColor="#999999"
+            android:textColor="@color/text_secondary"
             android:textSize="11sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvNamaProduk" />
