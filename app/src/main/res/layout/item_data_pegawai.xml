@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Jabatan"
-            android:textColor="#666666"
+            android:textColor="@color/text_secondary"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="@id/tv_nama_pegawai"
             app:layout_constraintStart_toStartOf="@id/tv_nama_pegawai"

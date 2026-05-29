@@ -3,6 +3,7 @@ package com.athalia.sellio
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -110,12 +111,17 @@ class RiwayatTransaksiActivity : AppCompatActivity() {
                 listTransaksi.clear()
                 listTransaksiOriginal.clear()
 
+                Log.d("Riwayat", "Jumlah data dari Firebase: ${snapshot.childrenCount}")
+
                 for (dataSnapshot in snapshot.children) {
                     val transaksi = dataSnapshot.getValue(ModelTransaksi::class.java)
                     if (transaksi != null) {
                         transaksi.idTransaksi = dataSnapshot.key ?: ""
                         listTransaksi.add(transaksi)
                         listTransaksiOriginal.add(transaksi)
+                        Log.d("Riwayat", "Transaksi ditemukan: ${transaksi.idTransaksi}, Total: ${transaksi.total}")
+                    } else {
+                        Log.d("Riwayat", "Gagal parsing transaksi untuk key: ${dataSnapshot.key}")
                     }
                 }
 
@@ -128,10 +134,13 @@ class RiwayatTransaksiActivity : AppCompatActivity() {
 
                 if (listTransaksi.isEmpty()) {
                     Toast.makeText(this@RiwayatTransaksiActivity, "Belum ada transaksi", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@RiwayatTransaksiActivity, "Ditemukan ${listTransaksi.size} transaksi", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
+                Log.e("Riwayat", "Error: ${error.message}")
                 Toast.makeText(this@RiwayatTransaksiActivity, "Gagal memuat data: ${error.message}", Toast.LENGTH_SHORT).show()
             }
         })

@@ -8,10 +8,11 @@
     android:layout_marginVertical="4dp"
     android:clickable="true"
     android:focusable="true"
-    app:cardBackgroundColor="@android:color/white"
+    app:cardBackgroundColor="@color/card_bg"
     app:cardCornerRadius="10dp"
     app:cardElevation="2dp"
-    app:strokeWidth="0dp">
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/card_stroke">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -24,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="TRX123456789"
-            android:textColor="#000000"
+            android:textColor="@color/text_primary"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rp 0"
-            android:textColor="#386373"
+            android:textColor="@color/primary"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -58,7 +59,7 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/ic_calender"
-                app:tint="#999999" />
+                app:tint="@color/text_secondary" />
 
             <TextView
                 android:id="@+id/tvTanggal"
@@ -66,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:text="28/05/2026"
-                android:textColor="#999999"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -86,7 +87,7 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/ic_time"
-                app:tint="#999999" />
+                app:tint="@color/text_secondary" />
 
             <TextView
                 android:id="@+id/tvWaktu"
@@ -94,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:text="14:30:25"
-                android:textColor="#999999"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
         </LinearLayout>
 
@@ -113,7 +114,7 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:src="@drawable/ic_product"
-                app:tint="#999999" />
+                app:tint="@color/text_secondary" />
 
             <TextView
                 android:id="@+id/tvJumlahItem"
@@ -121,7 +122,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:text="2 item"
-                android:textColor="#999999"
+                android:textColor="@color/text_secondary"
                 android:textSize="12sp" />
         </LinearLayout>
 

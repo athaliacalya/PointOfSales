@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Stok: 0"
-            android:textColor="#666666"
+            android:textColor="@color/text_secondary"
             android:textSize="11sp"
             app:layout_constraintStart_toStartOf="@id/tv_nama_produk"
             app:layout_constraintTop_toBottomOf="@id/tv_harga_produk" />
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Kategori"
-            android:textColor="#666666"
+            android:textColor="@color/text_secondary"
             android:textSize="11sp"
             app:layout_constraintStart_toStartOf="@id/tv_nama_produk"
             app:layout_constraintTop_toBottomOf="@id/tv_stok" />

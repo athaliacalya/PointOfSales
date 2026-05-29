@@ -1,7 +1,35 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Sellio" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark theme untuk mode malam -->
+    <style name="Theme.Sellio" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Warna Primary -->
+        <item name="colorPrimary">#2D525F</item>
+        <item name="colorPrimaryVariant">#1A3A44</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Warna Secondary -->
+        <item name="colorSecondary">#E67E22</item>
+        <item name="colorSecondaryVariant">#D35400</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Background Gelap -->
+        <item name="android:windowBackground">#121212</item>
+        <item name="android:colorBackground">#121212</item>
+
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">#1A1A1A</item>
+
+        <!-- Surface untuk Card -->
+        <item name="android:colorBackgroundFloating">#1E1E1E</item>
+
+        <!-- Text Colors -->
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:textColorSecondary">#B0B0B0</item>
+        <item name="android:textColorHint">#808080</item>
+
+        <!-- Color Control -->
+        <item name="colorControlNormal">#B0B0B0</item>
+        <item name="colorControlActivated">#E67E22</item>
+        <item name="colorControlHighlight">#40FFFFFF</item>
     </style>
 </resources>

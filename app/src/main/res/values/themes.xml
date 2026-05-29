@@ -1,8 +1,35 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Light theme untuk mode siang -->
+    <style name="Theme.Sellio" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Warna Primary -->
+        <item name="colorPrimary">#386373</item>
+        <item name="colorPrimaryVariant">#2D525F</item>
+        <item name="colorOnPrimary">@color/white</item>
 
-    <style name="Theme.Sellio" parent="Theme.Material3.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="android:statusBarColor">@color/bg_main</item>
+        <!-- Warna Secondary -->
+        <item name="colorSecondary">#FF9800</item>
+        <item name="colorSecondaryVariant">#F57C00</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Background -->
+        <item name="android:windowBackground">#F5F5F5</item>
+        <item name="android:colorBackground">#F5F5F5</item>
+
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <!-- Surface untuk Card -->
+        <item name="android:colorBackgroundFloating">#FFFFFF</item>
+
+        <!-- Text Colors -->
+        <item name="android:textColorPrimary">#1A1A1A</item>
+        <item name="android:textColorSecondary">#666666</item>
+        <item name="android:textColorHint">#999999</item>
+
+        <!-- Color Control -->
+        <item name="colorControlNormal">#666666</item>
+        <item name="colorControlActivated">#386373</item>
+        <item name="colorControlHighlight">#20B0B0B0</item>
     </style>
-
 </resources>

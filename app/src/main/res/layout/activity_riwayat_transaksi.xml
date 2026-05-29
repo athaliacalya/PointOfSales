@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@color/bg_main"
     tools:context=".RiwayatTransaksiActivity">
 
     <!-- Header -->
@@ -29,6 +29,7 @@
             android:layout_height="28dp"
             android:src="@drawable/ic_back"
             android:padding="4dp"
+            app:tint="@color/text_primary"
             android:contentDescription="Kembali" />
 
         <TextView
@@ -39,7 +40,7 @@
             android:text="Riwayat Transaksi"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#000000"
+            android:textColor="@color/text_primary"
             android:layout_marginStart="16dp" />
 
         <TextView
@@ -48,7 +49,7 @@
             android:layout_height="wrap_content"
             android:text="0 transaksi"
             android:textSize="14sp"
-            android:textColor="#666666" />
+            android:textColor="@color/text_secondary" />
 
     </LinearLayout>
 
@@ -68,11 +69,12 @@
         app:boxCornerRadiusBottomStart="24dp"
         app:boxCornerRadiusBottomEnd="24dp"
         app:startIconDrawable="@drawable/ic_search"
-        app:startIconTint="#999999"
+        app:startIconTint="@color/text_secondary"
         app:endIconMode="clear_text"
-        app:boxBackgroundColor="#FFFFFF"
+        app:endIconTint="@color/text_secondary"
+        app:boxBackgroundColor="@color/card_bg"
         app:boxStrokeWidth="1dp"
-        app:boxStrokeColor="#E0E0E0"
+        app:boxStrokeColor="@color/card_stroke"
         app:hintEnabled="false">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -80,6 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Cari transaksi..."
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_hint"
             android:inputType="text"
             android:textSize="14sp"
             android:paddingStart="12dp"

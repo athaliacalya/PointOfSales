@@ -41,6 +41,7 @@ class DataProdukActivity : AppCompatActivity() {
         const val EXTRA_PRODUK_ID = "extra_produk_id"
         const val EXTRA_PRODUK_NAMA = "extra_produk_nama"
         const val EXTRA_PRODUK_HARGA = "extra_produk_harga"
+        const val EXTRA_PRODUK_MODAL = "extra_produk_modal"
         const val EXTRA_PRODUK_STOK = "extra_produk_stok"
         const val EXTRA_PRODUK_STATUS = "extra_produk_status"
         const val EXTRA_PRODUK_FOTO = "extra_produk_foto"
@@ -97,6 +98,7 @@ class DataProdukActivity : AppCompatActivity() {
                 intent.putExtra(EXTRA_PRODUK_ID, produk.idProduk)
                 intent.putExtra(EXTRA_PRODUK_NAMA, produk.namaProduk)
                 intent.putExtra(EXTRA_PRODUK_HARGA, produk.hargaProduk)
+                intent.putExtra(EXTRA_PRODUK_MODAL, produk.hargaModal)
                 intent.putExtra(EXTRA_PRODUK_STOK, produk.stokProduk)
                 intent.putExtra(EXTRA_PRODUK_STATUS, produk.statusProduk)
                 intent.putExtra(EXTRA_PRODUK_FOTO, produk.fotoProduk)

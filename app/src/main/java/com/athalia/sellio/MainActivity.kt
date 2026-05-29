@@ -16,7 +16,7 @@ import com.athalia.sellio.kategori.DataKategoriActivity
 import com.athalia.sellio.kategori.DataPegawaiActivity
 import com.athalia.sellio.kategori.DataProdukActivity
 import com.athalia.sellio.DataPelangganActivity
-import com.athalia.sellio.RiwayatTransaksiActivity  // Tambahkan import ini
+import com.athalia.sellio.RiwayatTransaksiActivity
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -136,9 +136,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, TransaksiActivity::class.java))
         }
 
-        // Card Laporan - Riwayat Transaksi
+        // Card Laporan - Riwayat Transaksi & Income
         findViewById<android.view.View>(R.id.cardLaporan)?.setOnClickListener {
-            startActivity(Intent(this, RiwayatTransaksiActivity::class.java))
+            startActivity(Intent(this, LaporanActivity::class.java))
         }
     }
 

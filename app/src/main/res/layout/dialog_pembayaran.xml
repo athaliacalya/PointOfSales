@@ -11,7 +11,7 @@
         android:text="Ringkasan Belanja"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="#000000"
+        android:textColor="@color/text_primary"
         android:layout_marginBottom="16dp" />
 
     <!-- Subtotal -->
@@ -27,7 +27,7 @@
             android:layout_weight="1"
             android:text="Subtotal"
             android:textSize="14sp"
-            android:textColor="#666666" />
+            android:textColor="@color/text_secondary" />
 
         <TextView
             android:id="@+id/tvSubtotalDialog"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:text="Rp 0"
             android:textSize="14sp"
-            android:textColor="#666666" />
+            android:textColor="@color/text_secondary" />
     </LinearLayout>
 
     <!-- Pajak 10% -->
@@ -51,7 +51,7 @@
             android:layout_weight="1"
             android:text="Pajak (10%)"
             android:textSize="14sp"
-            android:textColor="#666666" />
+            android:textColor="@color/text_secondary" />
 
         <TextView
             android:id="@+id/tvPajakDialog"
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:text="Rp 0"
             android:textSize="14sp"
-            android:textColor="#666666" />
+            android:textColor="@color/text_secondary" />
     </LinearLayout>
 
     <View
@@ -82,7 +82,7 @@
             android:text="Total yang harus dibayar"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="#000000" />
+            android:textColor="@color/text_primary" />
 
         <TextView
             android:id="@+id/tvTotalDialog"
@@ -99,7 +99,7 @@
         android:layout_height="wrap_content"
         android:text="Jumlah Bayar:"
         android:textSize="14sp"
-        android:textColor="#666666" />
+        android:textColor="@color/text_secondary" />
 
     <EditText
         android:id="@+id/etJumlahBayar"
@@ -118,7 +118,7 @@
         android:text="Kembalian:"
         android:layout_marginTop="16dp"
         android:textSize="14sp"
-        android:textColor="#666666" />
+        android:textColor="@color/text_secondary" />
 
     <TextView
         android:id="@+id/tvKembali"

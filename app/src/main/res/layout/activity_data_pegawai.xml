@@ -39,7 +39,7 @@
             android:text="Data Pegawai"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#000000"
+            android:textColor="@color/text_primary"
             android:layout_marginStart="16dp" />
 
         <TextView
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="0 orang"
             android:textSize="14sp"
-            android:textColor="#666666" />
+            android:textColor="@color/text_secondary" />
 
     </LinearLayout>
 

@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:text="Tambah Kategori"
                     android:textSize="24sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/text_primary"
                     android:textStyle="bold" />
 
                 <TextView
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:text="Sellio"
                     android:textSize="14sp"
-                    android:textColor="#666666"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginTop="4dp" />
 
             </LinearLayout>
@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:text="Nama Kategori"
                     android:textSize="16sp"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_primary"
                     android:layout_marginBottom="8dp" />
 
                 <EditText
@@ -84,7 +84,7 @@
                     android:paddingEnd="16dp"
                     android:hint="Masukkan nama kategori"
                     android:textSize="16sp"
-                    android:textColor="#000000" />
+                    android:textColor="@color/text_primary" />
 
             </LinearLayout>
 
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:text="Status Kategori"
                     android:textSize="16sp"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_primary"
                     android:layout_marginBottom="8dp" />
 
                 <Spinner

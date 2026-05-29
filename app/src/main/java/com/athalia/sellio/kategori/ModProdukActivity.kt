@@ -53,6 +53,7 @@ class ModProdukActivity : AppCompatActivity() {
         const val EXTRA_PRODUK_ID = "extra_produk_id"
         const val EXTRA_PRODUK_NAMA = "extra_produk_nama"
         const val EXTRA_PRODUK_HARGA = "extra_produk_harga"
+        const val EXTRA_PRODUK_MODAL = "extra_produk_modal"
         const val EXTRA_PRODUK_STOK = "extra_produk_stok"
         const val EXTRA_PRODUK_STATUS = "extra_produk_status"
         const val EXTRA_PRODUK_FOTO = "extra_produk_foto"
@@ -114,6 +115,7 @@ class ModProdukActivity : AppCompatActivity() {
 
             etNamaProduk.setText(intent.getStringExtra(EXTRA_PRODUK_NAMA) ?: "")
             etHargaJual.setText(intent.getIntExtra(EXTRA_PRODUK_HARGA, 0).toString())
+            etHargaModal.setText(intent.getIntExtra(EXTRA_PRODUK_MODAL, 0).toString())
             etStok.setText(intent.getIntExtra(EXTRA_PRODUK_STOK, 0).toString())
             etFotoUrl.setText(intent.getStringExtra(EXTRA_PRODUK_FOTO) ?: "")
 
@@ -262,6 +264,7 @@ class ModProdukActivity : AppCompatActivity() {
         val namaProduk = etNamaProduk.text.toString().trim()
         val fotoUrl = etFotoUrl.text.toString().trim()
         val hargaJual = etHargaJual.text.toString().trim()
+        val hargaModal = etHargaModal.text.toString().trim()
         val stok = etStok.text.toString().trim()
         val kategoriTerpilih = actKategori.text.toString().trim()
 
@@ -306,6 +309,7 @@ class ModProdukActivity : AppCompatActivity() {
             idProduk = newProdukId ?: "",
             namaProduk = namaProduk,
             hargaProduk = hargaJual.toIntOrNull() ?: 0,
+            hargaModal = hargaModal.toIntOrNull() ?: 0,
             idKategori = idKategori,
             idCabang = cabangIds,
             fotoProduk = fotoUrl,

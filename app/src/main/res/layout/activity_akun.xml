@@ -47,7 +47,7 @@
                     android:text="Akun Saya"
                     android:textSize="22sp"
                     android:textStyle="bold"
-                    android:textColor="#000000"
+                    android:textColor="@color/text_primary"
                     android:layout_marginStart="16dp" />
 
                 <TextView
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="#000000"
+                    android:textColor="@color/text_primary"
                     android:layout_marginTop="12dp" />
 
             </LinearLayout>
@@ -110,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:text="First name"
                         android:textSize="13sp"
-                        android:textColor="#666666"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginBottom="4dp" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -138,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:text="Last name"
                         android:textSize="13sp"
-                        android:textColor="#666666"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginBottom="4dp" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -166,7 +166,7 @@
                         android:layout_height="wrap_content"
                         android:text="Mobile Number"
                         android:textSize="13sp"
-                        android:textColor="#666666"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginBottom="4dp" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -195,7 +195,7 @@
                         android:layout_height="wrap_content"
                         android:text="Email"
                         android:textSize="13sp"
-                        android:textColor="#666666"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginBottom="4dp" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -224,7 +224,7 @@
                         android:layout_height="wrap_content"
                         android:text="Date of birth"
                         android:textSize="13sp"
-                        android:textColor="#666666"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginBottom="4dp" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -254,7 +254,7 @@
                         android:layout_height="wrap_content"
                         android:text="Gender"
                         android:textSize="13sp"
-                        android:textColor="#666666"
+                        android:textColor="@color/text_secondary"
                         android:layout_marginBottom="4dp" />
 
                     <com.google.android.material.textfield.TextInputLayout

@@ -23,7 +23,7 @@ class ItemStrukAdapter(
         holder.bind(items[position])
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount() = items.size
 
     inner class StrukViewHolder(
         private val binding: ItemStrukTransaksiBinding

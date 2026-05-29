@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <!-- Izin untuk Internet -->
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Izin untuk Storage (Download PDF) -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- Izin untuk Bluetooth Printer -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" /> <!-- Izin untuk Kamera (jika ada scan barcode) -->
-    <uses-permission android:name="android.permission.CAMERA" /> <!-- Tambahkan uses-feature untuk kamera -->
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -21,16 +20,13 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sellio"
         android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true"
         tools:targetApi="31">
-        <activity
-            android:name=".RiwayatTransaksiActivity"
-            android:exported="false" />
-        <!-- File Provider untuk sharing PDF dan Images -->
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -39,20 +35,25 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider> <!-- Main Activity -->
+        </provider>
+
+        <!-- Main Activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Akun Activity -->
+        </activity>
+
+        <!-- Akun Activity -->
         <activity
             android:name=".activity_akun"
-            android:exported="false" /> <!-- Kategori Activities -->
+            android:exported="false" />
+
+        <!-- Kategori Activities -->
         <activity
             android:name=".kategori.DataKategoriActivity"
             android:exported="false" />
@@ -61,37 +62,55 @@
             android:exported="false" />
         <activity
             android:name=".kategori.activity_edit_kategori"
-            android:exported="false" /> <!-- Produk Activities -->
+            android:exported="false" />
+
+        <!-- Produk Activities -->
         <activity
             android:name=".kategori.DataProdukActivity"
             android:exported="false" />
         <activity
             android:name=".kategori.ModProdukActivity"
-            android:exported="false" /> <!-- Pegawai Activities -->
+            android:exported="false" />
+
+        <!-- Pegawai Activities -->
         <activity
             android:name=".kategori.DataPegawaiActivity"
             android:exported="false" />
         <activity
             android:name=".kategori.ModPegawaiActivity"
-            android:exported="false" /> <!-- Cabang Activities -->
+            android:exported="false" />
+
+        <!-- Cabang Activities -->
         <activity
             android:name=".kategori.DataCabangActivity"
             android:exported="false" />
         <activity
             android:name=".kategori.ModCabangActivity"
-            android:exported="false" /> <!-- Pelanggan Activities (Perbaiki path) -->
+            android:exported="false" />
+
+        <!-- Pelanggan Activities -->
         <activity
             android:name=".DataPelangganActivity"
             android:exported="false" />
         <activity
             android:name=".ModPelangganActivity"
-            android:exported="false" /> <!-- Transaksi Activity -->
+            android:exported="false" />
+
+        <!-- Transaksi Activity -->
         <activity
             android:name=".TransaksiActivity"
             android:exported="false" />
+
+        <!-- Laporan Activity -->
+        <activity
+            android:name=".LaporanActivity"
+            android:exported="false" />
+
+        <!-- Riwayat Transaksi Activity -->
         <activity
             android:name=".RiwayatTransaksiActivity"
             android:exported="false" />
+
     </application>
 
 </manifest>

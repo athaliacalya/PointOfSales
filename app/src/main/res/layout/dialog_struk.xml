@@ -33,14 +33,14 @@
                     android:text="SELLIO"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="#000000" />
+                    android:textColor="@color/text_primary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Smart Daily Store"
                     android:textSize="12sp"
-                    android:textColor="#666666" />
+                    android:textColor="@color/text_secondary" />
 
             </LinearLayout>
 
@@ -64,7 +64,7 @@
                     android:text="NO TRANSAKSI"
                     android:textSize="11sp"
                     android:textStyle="bold"
-                    android:textColor="#000000" />
+                    android:textColor="@color/text_primary" />
 
                 <TextView
                     android:id="@+id/tvNoTransaksi"
@@ -73,7 +73,7 @@
                     android:layout_weight="1"
                     android:text=""
                     android:textSize="11sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/text_primary"
                     android:gravity="end" />
             </LinearLayout>
 
@@ -90,7 +90,7 @@
                     android:text="TANGGAL"
                     android:textSize="11sp"
                     android:textStyle="bold"
-                    android:textColor="#000000" />
+                    android:textColor="@color/text_primary" />
 
                 <TextView
                     android:id="@+id/tvTanggal"
@@ -99,7 +99,7 @@
                     android:layout_weight="1"
                     android:text=""
                     android:textSize="11sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/text_primary"
                     android:gravity="end" />
             </LinearLayout>
 
@@ -123,7 +123,7 @@
                     android:text="BARANG"
                     android:textSize="11sp"
                     android:textStyle="bold"
-                    android:textColor="#000000" />
+                    android:textColor="@color/text_primary" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -132,7 +132,7 @@
                     android:text="JML"
                     android:textSize="11sp"
                     android:textStyle="bold"
-                    android:textColor="#000000"
+                    android:textColor="@color/text_primary"
                     android:gravity="center" />
 
                 <TextView
@@ -142,7 +142,7 @@
                     android:text="HARGA"
                     android:textSize="11sp"
                     android:textStyle="bold"
-                    android:textColor="#000000"
+                    android:textColor="@color/text_primary"
                     android:gravity="end" />
 
                 <TextView
@@ -152,7 +152,7 @@
                     android:text="TOTAL"
                     android:textSize="11sp"
                     android:textStyle="bold"
-                    android:textColor="#000000"
+                    android:textColor="@color/text_primary"
                     android:gravity="end" />
 
             </LinearLayout>
@@ -190,7 +190,7 @@
                     android:text="TOTAL ITEM"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:textColor="#000000" />
+                    android:textColor="@color/text_primary" />
 
                 <TextView
                     android:id="@+id/tvJumlahItemStruk"
@@ -199,7 +199,7 @@
                     android:text="0"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:textColor="#000000" />
+                    android:textColor="@color/text_primary" />
 
             </LinearLayout>
 
@@ -221,7 +221,7 @@
                     android:layout_weight="1"
                     android:text="SUBTOTAL"
                     android:textSize="11sp"
-                    android:textColor="#666666" />
+                    android:textColor="@color/text_secondary" />
 
                 <TextView
                     android:id="@+id/tvSubtotal"
@@ -229,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textSize="11sp"
-                    android:textColor="#666666" />
+                    android:textColor="@color/text_secondary" />
 
             </LinearLayout>
 
@@ -245,7 +245,7 @@
                     android:layout_weight="1"
                     android:text="PAJAK (10%)"
                     android:textSize="11sp"
-                    android:textColor="#666666" />
+                    android:textColor="@color/text_secondary" />
 
                 <TextView
                     android:id="@+id/tvPajak"
@@ -253,7 +253,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textSize="11sp"
-                    android:textColor="#666666" />
+                    android:textColor="@color/text_secondary" />
 
             </LinearLayout>
 
@@ -276,7 +276,7 @@
                     android:text="TOTAL"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="#000000" />
+                    android:textColor="@color/text_primary" />
 
                 <TextView
                     android:id="@+id/tvTotalStruk"
@@ -285,7 +285,7 @@
                     android:text="0"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="#000000" />
+                    android:textColor="@color/text_primary" />
 
             </LinearLayout>
 
@@ -309,7 +309,7 @@
                     android:text="PEMBAYARAN"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:textColor="#000000" />
+                    android:textColor="@color/text_primary" />
 
                 <TextView
                     android:id="@+id/tvBayar"
@@ -317,7 +317,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textSize="12sp"
-                    android:textColor="#000000" />
+                    android:textColor="@color/text_primary" />
 
             </LinearLayout>
 
@@ -334,7 +334,7 @@
                     android:text="KEMBALIAN"
                     android:textSize="12sp"
                     android:textStyle="bold"
-                    android:textColor="#000000" />
+                    android:textColor="@color/text_primary" />
 
                 <TextView
                     android:id="@+id/tvKembaliStruk"
@@ -366,14 +366,14 @@
                     android:layout_height="wrap_content"
                     android:text="Terima kasih sudah berbelanja"
                     android:textSize="11sp"
-                    android:textColor="#666666" />
+                    android:textColor="@color/text_secondary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="di Sellio"
                     android:textSize="11sp"
-                    android:textColor="#666666" />
+                    android:textColor="@color/text_secondary" />
 
             </LinearLayout>
 
@@ -381,16 +381,37 @@
 
     </ScrollView>
 
-    <!-- Tombol Download di luar layoutStruk (tidak akan ikut tercetak) -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnDownload"
+    <!-- Tombol Download dan Print di luar layoutStruk (tidak akan ikut tercetak) -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_margin="16dp"
-        android:text="Download and Share"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:backgroundTint="#386373"
-        app:cornerRadius="12dp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDownload"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="Share Struk"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:backgroundTint="#386373"
+            app:cornerRadius="12dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPrint"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="Print Struk"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:backgroundTint="#4CAF50"
+            app:cornerRadius="12dp" />
+
+    </LinearLayout>
 
 </LinearLayout>

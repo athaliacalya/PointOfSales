@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Produk"
-            android:textColor="#000000"
+            android:textColor="@color/text_primary"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rp 0"
-            android:textColor="#666666"
+            android:textColor="@color/text_secondary"
             android:textSize="12sp" />
 
     </LinearLayout>
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:text="1"
             android:textAlignment="center"
-            android:textColor="#000000"
+            android:textColor="@color/text_primary"
             android:textSize="14sp" />
 
         <!-- Tombol Plus -->

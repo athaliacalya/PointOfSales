@@ -7,6 +7,7 @@ data class ModelProduk(
     var idProduk: String = "",
     var namaProduk: String = "",
     var hargaProduk: Int = 0,
+    var hargaModal: Int = 0,
     var idKategori: String = "",
     var idCabang: String = "",
     var fotoProduk: String = "",
@@ -31,6 +32,7 @@ data class ModelProduk(
         idProduk = parcel.readString() ?: "",
         namaProduk = parcel.readString() ?: "",
         hargaProduk = parcel.readInt(),
+        hargaModal = parcel.readInt(),
         idKategori = parcel.readString() ?: "",
         idCabang = parcel.readString() ?: "",
         fotoProduk = parcel.readString() ?: "",
@@ -45,6 +47,7 @@ data class ModelProduk(
         parcel.writeString(idProduk)
         parcel.writeString(namaProduk)
         parcel.writeInt(hargaProduk)
+        parcel.writeInt(hargaModal)
         parcel.writeString(idKategori)
         parcel.writeString(idCabang)
         parcel.writeString(fotoProduk)
