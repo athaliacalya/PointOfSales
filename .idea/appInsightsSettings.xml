@@ -8,7 +8,7 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.athalia.sellio" />
+                  <option name="appId" value="com.athalia_calya.pos" />
                   <option name="mobileSdkAppId" value="1:750053363415:android:d35a01b1b1b2086d052a92" />
                   <option name="projectId" value="pose-thali" />
                   <option name="projectNumber" value="750053363415" />

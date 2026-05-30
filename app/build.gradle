@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.athalia.sellio'
+    namespace 'com.athalia_calya.pos'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.athalia.sellio"
+        applicationId "com.athalia_calya.pos"
         minSdk 24
         targetSdk 34
         versionCode 1
