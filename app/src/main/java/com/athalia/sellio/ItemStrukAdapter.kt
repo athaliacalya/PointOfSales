@@ -32,8 +32,8 @@ class ItemStrukAdapter(
         fun bind(item: ItemTransaksi) {
             binding.tvNamaProduk.text = item.namaProduk.uppercase()
             binding.tvJumlah.text = "x${item.jumlah}"
-            binding.tvHarga.text = formatNumber(item.harga.toLong())
-            binding.tvSubtotal.text = formatNumber(item.subtotal)
+            binding.tvHarga.text = "Rp " + formatNumber(item.harga.toLong())
+            binding.tvSubtotal.text = "Rp " + formatNumber(item.subtotal)
         }
 
         private fun formatNumber(amount: Long): String {

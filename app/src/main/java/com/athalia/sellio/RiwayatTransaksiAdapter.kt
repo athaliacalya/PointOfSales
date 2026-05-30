@@ -10,7 +10,8 @@ import java.util.Locale
 
 class RiwayatTransaksiAdapter(
     private val transaksiList: ArrayList<ModelTransaksi>,
-    private val onItemClick: (ModelTransaksi) -> Unit
+    private val onItemClick: (ModelTransaksi) -> Unit,
+    private val onPrintClick: (ModelTransaksi) -> Unit
 ) : RecyclerView.Adapter<RiwayatTransaksiAdapter.RiwayatViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RiwayatViewHolder {
@@ -58,6 +59,10 @@ class RiwayatTransaksiAdapter(
                     binding.chipStatus.text = "Proses"
                     binding.chipStatus.setChipBackgroundColorResource(android.R.color.holo_orange_light)
                 }
+            }
+
+            binding.ivPrint.setOnClickListener {
+                onPrintClick(transaksi)
             }
 
             binding.root.setOnClickListener {

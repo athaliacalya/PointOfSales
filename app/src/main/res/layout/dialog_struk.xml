@@ -391,7 +391,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDownload"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="53dp"
             android:layout_weight="1"
             android:layout_marginEnd="8dp"
             android:text="Share Struk"
@@ -403,7 +403,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPrint"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="53dp"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:text="Print Struk"

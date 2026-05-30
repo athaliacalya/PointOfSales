@@ -126,6 +126,22 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
+        <!-- Printer Icon -->
+        <ImageView
+            android:id="@+id/ivPrint"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="8dp"
+            android:padding="6dp"
+            android:src="@drawable/ic_printer"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            app:tint="@color/primary"
+            app:layout_constraintEnd_toStartOf="@id/chipStatus"
+            app:layout_constraintTop_toTopOf="@id/chipStatus"
+            app:layout_constraintBottom_toBottomOf="@id/chipStatus" />
+
         <!-- Status -->
         <com.google.android.material.chip.Chip
             android:id="@+id/chipStatus"

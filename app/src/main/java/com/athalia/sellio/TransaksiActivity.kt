@@ -350,11 +350,11 @@ class TransaksiActivity : AppCompatActivity() {
             val totalItem = transaksi.items.sumOf { it.jumlah }
             tvJumlahItemStruk.text = totalItem.toString()
 
-            tvSubtotal.text = formatRupiahTanpaRp(transaksi.subtotal)
-            tvPajak.text = formatRupiahTanpaRp(transaksi.pajak)
-            tvTotalStruk.text = formatRupiahTanpaRp(transaksi.total)
-            tvBayar.text = formatRupiahTanpaRp(transaksi.bayar)
-            tvKembaliStruk.text = formatRupiahTanpaRp(transaksi.kembali)
+            tvSubtotal.text = formatRupiah(transaksi.subtotal)
+            tvPajak.text = formatRupiah(transaksi.pajak)
+            tvTotalStruk.text = formatRupiah(transaksi.total)
+            tvBayar.text = formatRupiah(transaksi.bayar)
+            tvKembaliStruk.text = formatRupiah(transaksi.kembali)
 
             val btnPrint = view.findViewById<MaterialButton>(R.id.btnPrint)
 
@@ -582,18 +582,18 @@ class TransaksiActivity : AppCompatActivity() {
                 
                 for (item in transaksi.items) {
                     stringBuilder.append("[L]<b>${item.namaProduk}</b>\n")
-                    val itemDetail = "  ${item.jumlah} x ${formatRupiahTanpaRp(item.harga.toLong())}"
-                    val itemSubtotal = formatRupiahTanpaRp(item.subtotal)
+                    val itemDetail = "  ${item.jumlah} x ${formatRupiah(item.harga.toLong())}"
+                    val itemSubtotal = formatRupiah(item.subtotal)
                     stringBuilder.append("[L]${itemDetail}[R]${itemSubtotal}\n")
                 }
                 
                 stringBuilder.append("[C]--------------------------------\n")
-                stringBuilder.append("[L]SUBTOTAL[R]${formatRupiahTanpaRp(transaksi.subtotal)}\n")
-                stringBuilder.append("[L]PAJAK (10%)[R]${formatRupiahTanpaRp(transaksi.pajak)}\n")
+                stringBuilder.append("[L]SUBTOTAL[R]${formatRupiah(transaksi.subtotal)}\n")
+                stringBuilder.append("[L]PAJAK (10%)[R]${formatRupiah(transaksi.pajak)}\n")
                 stringBuilder.append("[C]--------------------------------\n")
-                stringBuilder.append("[L]<b>TOTAL</b>[R]<b>${formatRupiahTanpaRp(transaksi.total)}</b>\n")
-                stringBuilder.append("[L]BAYAR[R]${formatRupiahTanpaRp(transaksi.bayar)}\n")
-                stringBuilder.append("[L]KEMBALI[R]${formatRupiahTanpaRp(transaksi.kembali)}\n")
+                stringBuilder.append("[L]<b>TOTAL</b>[R]<b>${formatRupiah(transaksi.total)}</b>\n")
+                stringBuilder.append("[L]BAYAR[R]${formatRupiah(transaksi.bayar)}\n")
+                stringBuilder.append("[L]KEMBALI[R]${formatRupiah(transaksi.kembali)}\n")
                 stringBuilder.append("[C]================================\n")
                 stringBuilder.append("[C]Terima kasih sudah berbelanja\n")
                 stringBuilder.append("[C]di Sellio\n\n\n\n")
