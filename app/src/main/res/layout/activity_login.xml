@@ -7,7 +7,7 @@
     android:background="@color/bg_main"
     tools:context=".LoginActivity">
 
-    <!-- Top decorative brand background/header (Slate-blue gradient feel) -->
+
     <View
         android:id="@+id/viewHeaderBackground"
         android:layout_width="0dp"
@@ -17,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- A subtle curve/arc shape overlay under the header background using constraint layout or visual styling -->
 
     <ScrollView
         android:layout_width="0dp"
@@ -35,7 +34,6 @@
             android:layout_height="wrap_content"
             android:padding="24dp">
 
-            <!-- Logo & Brand Header Section -->
             <LinearLayout
                 android:id="@+id/layoutLogoHeader"
                 android:layout_width="wrap_content"
@@ -47,7 +45,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <!-- Elevated Circle for Brand Icon -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -84,7 +81,6 @@
 
             </LinearLayout>
 
-            <!-- Login Card Container -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardLogin"
                 android:layout_width="match_parent"
@@ -124,7 +120,6 @@
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
 
-                    <!-- Divider -->
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
@@ -132,7 +127,6 @@
                         android:layout_marginBottom="24dp"
                         android:background="@color/gray_300" />
 
-                    <!-- Input Email -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -169,7 +163,6 @@
                             android:textColor="@color/text_primary" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Input Password -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -208,7 +201,6 @@
                             android:textColor="@color/text_primary" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Forgot Password Link -->
                     <TextView
                         android:id="@+id/tvForgotPassword"
                         android:layout_width="wrap_content"
@@ -224,7 +216,6 @@
                         android:background="?attr/selectableItemBackgroundBorderless"
                         android:padding="4dp" />
 
-                    <!-- Action Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnMasuk"
                         android:layout_width="match_parent"
@@ -238,7 +229,6 @@
                         app:cornerRadius="12dp"
                         app:elevation="4dp" />
 
-                    <!-- Footer Info (Mock sign up or help) -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

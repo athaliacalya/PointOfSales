@@ -85,7 +85,7 @@
             android:paddingEnd="12dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- RecyclerView Produk - mengambil sisa ruang -->
+    <!-- RecyclerView Produk -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProduk"
         android:layout_width="0dp"

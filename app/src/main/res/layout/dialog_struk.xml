@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <!-- Layout Struk (tanpa tombol) - ini yang akan di-capture -->
     <ScrollView
         android:id="@+id/layoutStruk"
         android:layout_width="match_parent"
